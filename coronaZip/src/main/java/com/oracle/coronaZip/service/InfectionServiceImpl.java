@@ -15,14 +15,14 @@ public class InfectionServiceImpl implements InfectionService{
 	private InfectionDao id;
 	
 	@Override
-	public List<Infection> cnList() {
-		List<Infection> cnList = id.cnList();
+	public List<Infection> cnList(String day) {
+		List<Infection> cnList = id.cnList(day);
 		return cnList;
 	}
 
 	@Override
-	public Infection cn() {
-		Infection cn = id.cn();
+	public Infection cn(String day) {
+		Infection cn = id.cn(day);
 		return cn;
 	}
 

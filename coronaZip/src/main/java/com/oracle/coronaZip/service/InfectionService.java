@@ -5,6 +5,6 @@ import java.util.List;
 import com.oracle.coronaZip.model.Infection;
 
 public interface InfectionService {
-	List<Infection> cnList();
-	Infection       cn();
+	List<Infection> cnList(String day);
+	Infection       cn(String day);
 }

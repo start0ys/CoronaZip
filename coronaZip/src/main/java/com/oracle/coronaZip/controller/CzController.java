@@ -13,8 +13,11 @@ import com.oracle.coronaZip.service.InfectionService;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -37,9 +40,22 @@ public class CzController {
 	
 	@GetMapping(value = "index")
 	public String main(Model model) throws Exception {
+		//오늘 날짜
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+		String today = sdf.format(date);
 		
-		List<Infection> cnList = is.cnList();
-		Infection cn = is.cn();
+		//어제 날짜
+		Date dDate = new Date();
+		dDate = new Date(dDate.getTime()+(1000*60*60*24*-1));
+		SimpleDateFormat dSdf = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
+		String yesterday = dSdf.format(dDate);
+
+		System.out.println(today);
+		System.out.println(yesterday);
+		
+		List<Infection> cnList = is.cnList(today);
+		Infection cn = is.cn(today);
 		
 		model.addAttribute("cnList", cnList);
 		model.addAttribute("cn", cn);

@@ -28,9 +28,9 @@ public class InfectionImpl implements InfectionDao {
 	private SqlSession session;
 	
 	@Override
-	public List<Infection> cnList()  {
+	public List<Infection> cnList(String day)  {
 		List<Infection> cnList = new ArrayList<Infection>();
-    	String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=4GfH2i3tXiTAlgB1urJs7gd3SalAlH0w9dTp3ytpzhhhq8CcaYTF0rMwwVtATbZVLNUw1hLIc1as6IHBPxFvMA%3D%3D&pageNo=1&numOfRows=10&startCreateDt=20210924&endCreateDt=20210924";
+    	String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19SidoInfStateJson?serviceKey=4GfH2i3tXiTAlgB1urJs7gd3SalAlH0w9dTp3ytpzhhhq8CcaYTF0rMwwVtATbZVLNUw1hLIc1as6IHBPxFvMA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+day+"&endCreateDt="+day;
     	 	
     	try {
     	   	URL obj = new URL(url);
@@ -90,8 +90,8 @@ public class InfectionImpl implements InfectionDao {
 	}
 
 	@Override
-	public Infection cn() {
-    	String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=4GfH2i3tXiTAlgB1urJs7gd3SalAlH0w9dTp3ytpzhhhq8CcaYTF0rMwwVtATbZVLNUw1hLIc1as6IHBPxFvMA%3D%3D&pageNo=1&numOfRows=10&startCreateDt=20210924&endCreateDt=20210924";
+	public Infection cn(String day) {
+    	String url = "http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson?serviceKey=4GfH2i3tXiTAlgB1urJs7gd3SalAlH0w9dTp3ytpzhhhq8CcaYTF0rMwwVtATbZVLNUw1hLIc1as6IHBPxFvMA%3D%3D&pageNo=1&numOfRows=10&startCreateDt="+day+"&endCreateDt="+day;
     	Infection cn = new Infection();	
     	try {
     	   	URL obj = new URL(url);
