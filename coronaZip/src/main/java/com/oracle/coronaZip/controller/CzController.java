@@ -50,12 +50,16 @@ public class CzController {
 		dDate = new Date(dDate.getTime()+(1000*60*60*24*-1));
 		SimpleDateFormat dSdf = new SimpleDateFormat("yyyyMMdd", Locale.KOREA);
 		String yesterday = dSdf.format(dDate);
-
-		System.out.println(today);
-		System.out.println(yesterday);
 		
-		List<Infection> cnList = is.cnList(today);
-		Infection cn = is.cn(today);
+		List<Infection> cnList = null;
+		Infection cn = null;
+		if(is.cnList(today) == null || is.cn(today) == null) {
+			cnList = is.cnList(yesterday);
+			cn = is.cn(yesterday);
+		}else {
+			cnList = is.cnList(today);
+			cn = is.cn(today);
+		}
 		
 		model.addAttribute("cnList", cnList);
 		model.addAttribute("cn", cn);

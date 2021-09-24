@@ -84,7 +84,9 @@ public class InfectionImpl implements InfectionDao {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			//e.printStackTrace();
+			return null;
 		}
 		return cnList;
 	}
@@ -138,7 +140,9 @@ public class InfectionImpl implements InfectionDao {
 			cn.setDeath(death);
 					
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			//e.printStackTrace();
+			return null;
 		}
 		return cn;
 	}
