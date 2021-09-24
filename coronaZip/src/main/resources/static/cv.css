@@ -1,0 +1,40 @@
+.carousel-content {
+    color:black;
+    display:flex;
+    align-items:center;
+}
+/* #carousel-example{
+    width: 60%;
+    margin: 0 auto;
+    margin-top:50px;
+} */
+.carousel-control.left{
+    background-image: linear-gradient(to right,rgba(0,0,0,.0) 0,rgba(0,0,0,0) 100%);
+}
+.carousel-control.right{
+    background-image: linear-gradient(to right,rgba(0,0,0,.0) 0,rgba(0,0,0,0) 100%);
+}
+.glyphicon-chevron-left:before {
+    color: black;
+}
+.glyphicon-chevron-right:before {
+    color: black;
+}
+/* .col-xs-offset-3 {
+    background-image: linear-gradient(to right,rgba(0,0,0,.0001),rgba(0,0,0,.2),rgba(0,0,0,.3),rgba(0,0,0,.3),rgba(0,0,0,.2),rgba(0,0,0,.0001) 100%);
+} */
+/* .carousel-control {
+    width: 33%;
+} */
+.carousel-control {
+    width: 0%;
+    top: 111%;
+}
+#carousel-example{
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 19%;
+}
+.carousel-caption{
+    bottom: -23px; 
+}
