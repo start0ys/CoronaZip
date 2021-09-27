@@ -40,7 +40,7 @@ public class CzController {
 	@Autowired
 	private InfectionService is;
 	
-	@GetMapping(value = "index")
+	@GetMapping(value = "/")
 	public String main(Model model) throws Exception {
 		//오늘 날짜
 		Date date = new Date();
@@ -69,6 +69,11 @@ public class CzController {
 		model.addAttribute("news", news);
 		
 		return "index";
+	}
+	
+	@GetMapping(value = "center")
+	public String center() {
+		return "center";
 	}
 	
 	
