@@ -76,5 +76,10 @@ public class CzController {
 		return "center";
 	}
 	
+	@GetMapping(value = "login")
+	public String login() {
+		return "login";
+	}
+	
 	
 }

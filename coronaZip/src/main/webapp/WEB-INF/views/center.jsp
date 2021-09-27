@@ -41,7 +41,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	    </div>
 	    <ul class="nav navbar-nav navbar-right">
 	        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-	        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 	    </ul>
 	    <ul class="nav nav-tabs">
 	        <li><a href="/"><i class='fas fa-home' style='font-size:15px'></i> Home</a></li>
