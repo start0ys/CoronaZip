@@ -117,10 +117,16 @@
           <a class="right carousel-control" href="#carousel-example" data-slide="next">
           <span class="glyphicon glyphicon-chevron-right"></span>
           </a>
-    
         </div>
       </div>
-  
+      <c:forEach var="news" items="${news}">
+		 <a href="${news.link }" target="_blank ">
+		 	<div class="col-sm-1 frame" style="margin-left: 4%;">
+		 		<h4 style="padding-top: 25px; font-weight: bold; height: 110px;">${news.title }</h4>
+		 		<div style="height: 230px; border-top: 1px solid;padding-top: 10px;">${news.content }</div>
+		 	</div>
+		 </a>   
+      </c:forEach>
     </div>
     
     <div class="footer">

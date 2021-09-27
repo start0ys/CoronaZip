@@ -8,18 +8,22 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.ibatis.session.SqlSession;
+import org.jsoup.Jsoup;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.oracle.coronaZip.model.Infection;
+import com.oracle.coronaZip.model.News;
 
 @Repository
 public class InfectionImpl implements InfectionDao {
@@ -145,6 +149,34 @@ public class InfectionImpl implements InfectionDao {
 			return null;
 		}
 		return cn;
+	}
+
+	@Override
+	public List<News> news() {
+		List<News> news = new ArrayList<News>();
+		String url = "https://www.google.co.kr/search?q=%EC%BD%94%EB%A1%9C%EB%82%98+%EB%89%B4%EC%8A%A4&sxsrf=ALeKk03ogE3dQlIdSSRA5y2xi2P2QXjG7g%3A1625495107646&source=hp&ei=QxbjYKvVJMraz7sP2dO4kA4&iflsig=AINFCbYAAAAAYOMkUwvYGtNQ00I9gxMZ2MLEQznDfhlc&oq=%EC%BD%94%EB%A1%9C%EB%82%98+%EB%89%B4%EC%8A%A4&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEMQCMgIIADIHCAAQhwIQFDICCAAyAggAMgIIADIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCCMQ6gIQJzoECCMQJzoICAAQsQMQgwE6BQgAELEDOg0IABCHAhCxAxCDARAUUJ8OWK8cYKweaARwAHgCgAF6iAHKCJIBAzEuOZgBAKABAaoBB2d3cy13aXqwAQo&sclient=gws-wiz&ved=0ahUKEwjrguSTkczxAhVK7XMBHdkpDuIQ4dUDCAc&uact=5";    //크롤링할 url지정
+        org.jsoup.nodes.Document doc = null;        //Document에는 페이지의 전체 소스가 저장된다
+	    try {
+	    	doc = Jsoup.connect(url).get();
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    }
+        //select를 이용하여 원하는 태그를 선택한다. select는 원하는 값을 가져오기 위한 중요한 기능이다.
+        //                               ==>원하는 값들이 들어있는 덩어리를 가져온다
+        Elements element = doc.select("div#kp-wp-tab-Latest"); 
+        //Iterator을 사용하여 하나씩 값 가져오기
+        //덩어리안에서 필요한부분만 선택하여 가져올 수 있다.
+        Iterator<org.jsoup.nodes.Element> title = element.select("div.mCBkyc.nDgy9d").iterator();
+        Iterator<org.jsoup.nodes.Element> content = element.select("div.GI74Re.nDgy9d").iterator();
+        Iterator<org.jsoup.nodes.Element> link = element.select("a.WlydOe").iterator();
+        for(int i = 0; i < 6; i++) {
+        	News ns = new News();
+        	ns.setTitle(title.next().text());
+        	ns.setContent(content.next().text());
+        	ns.setLink(link.next().attr("href"));
+        	news.add(ns);
+        }
+		return news;
 	}
 
 }

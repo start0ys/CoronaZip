@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.oracle.coronaZip.dao.InfectionDao;
 import com.oracle.coronaZip.model.Infection;
+import com.oracle.coronaZip.model.News;
 
 @Service
 public class InfectionServiceImpl implements InfectionService{
@@ -24,6 +25,12 @@ public class InfectionServiceImpl implements InfectionService{
 	public Infection cn(String day) {
 		Infection cn = id.cn(day);
 		return cn;
+	}
+
+	@Override
+	public List<News> news() {
+		List<News> news = id.news();
+		return news;
 	}
 
 }
