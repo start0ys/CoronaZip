@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class News {
-	String title;
-	String content;
-	String link;
+	private String title;
+	private String content;
+	private String link;
 }

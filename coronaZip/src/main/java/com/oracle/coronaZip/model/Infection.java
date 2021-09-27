@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Infection {
-	String city;   String total;  String add;
-	String local;  String over;   String recovery;
+	private String city;   private String total;  private String add;
+	private String local;  private String over;   private String recovery;
 	
-	String stateDt;String totCnt; String exam;
-	String clear;  String death;
+	private String stateDt;private String totCnt; private String exam;
+	private String clear;  private String death;
 }
