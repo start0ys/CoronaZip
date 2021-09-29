@@ -81,5 +81,10 @@ public class CzController {
 		return "login";
 	}
 	
+	@GetMapping(value = "join")
+	public String join() {
+		return "join";
+	}
+	
 	
 }
