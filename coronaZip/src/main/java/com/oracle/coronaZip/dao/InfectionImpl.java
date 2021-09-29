@@ -185,4 +185,10 @@ public class InfectionImpl implements InfectionDao {
 		session.insert("join", user);
 	}
 
+	@Override
+	public int idChk(String id2) {
+		int idChk = session.selectOne("idChk", id2);
+		return idChk;
+	}
+
 }

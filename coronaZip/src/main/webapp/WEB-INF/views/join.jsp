@@ -90,7 +90,15 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
               <input type="radio" name="sex" value="여자">여자
             </td>
           </tr>
-          <tr><th>아이디</th><td><input type="text" name="id" required="required" style="margin-left: 7px;"><button>중복확인</button></td></tr>
+          <tr>
+	          <th>아이디</th>
+	          <td>
+	          	<input type="text" id="id" name="id" required="required" style="margin-left: 7px;">
+	          	<input type="hidden" id="sameChk" name="sameChk" value="0">
+	          	<input type="button" value="중복확인" onclick="idChk()">
+	          	<span id="idAlert"></span>
+	          </td>
+          </tr>
           <tr><th>비밀번호</th><td><input type="password" id="pw" name="pw" required="required" style="margin-left: 7px;"></td></tr>
           <tr>
          	 <th>비밀번호 확인</th>
@@ -178,6 +186,10 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			alert("비밀번호가 일치하지 않습니다");
 			return false;
 		}
+		if(frm.sameChk.value == 0){
+			alert("아이디 중복체크를 확인해주세요");
+			return false;
+		}
 		return true;
   }
   function vc(){
@@ -193,6 +205,30 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  }else if(pw != pw2){
 		  pwAlert.innerHTML = "비밀번호가 일치하지 않습니다.";
 		  pwAlert.style.color = "red";
+	  }
+  }
+  function idChk(){
+	  if(!frm.id.value){
+		  $('#idAlert').html("아이디를 입력하지 않았습니다.");
+    	  $('#idAlert').css('color','red');
+	  }else{
+		 $.ajax({
+	          url : "/idChk",
+	          type : "POST",
+	          dataType :"JSON",
+	          data : {"id2" : $("#id").val()},
+	          success : function (data) {
+	              if(data == 0) {
+	            	  $('#idAlert').html("사용 가능한 아이디입니다.");
+	            	  $('#idAlert').css('color','#08A600');
+	            	  $("#sameChk").val('1');
+	              }else {
+	            	  $('#idAlert').html("중복된 아이디가 존재합니다.");
+	            	  $('#idAlert').css('color','red');
+	              }
+	          }
+
+	      })  
 	  }
   }
 </script>

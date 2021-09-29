@@ -11,4 +11,5 @@ public interface InfectionDao {
 	Infection       cn(String day);
 	List<News>      news();
 	void            join(User user);
+	int             idChk(String id2);
 }

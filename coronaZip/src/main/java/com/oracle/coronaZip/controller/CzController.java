@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -93,6 +94,13 @@ public class CzController {
 		user.setAddress(user.getBs_addr() + " " + user.getDt_addr());
 		is.join(user);
 		return "redirect:/";
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "idChk")
+	public int idChk(String id2) {
+		int idChk = is.idChk(id2);
+		return idChk;
 	}
 	
 	

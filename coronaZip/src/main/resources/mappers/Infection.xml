@@ -7,4 +7,7 @@
 	<insert id="join" parameterType="User">
 		insert into member values (#{name},#{birth},#{sex},#{id},#{pw},#{nickname},#{email},#{postcode},#{address},#{vaccine})
 	</insert>
+	<select id="idChk" resultType="int" parameterType="String">
+		select count(id) from member where id = #{id2}
+	</select>
 </mapper>

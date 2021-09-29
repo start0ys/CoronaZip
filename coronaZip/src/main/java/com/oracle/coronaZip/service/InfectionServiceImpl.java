@@ -39,4 +39,10 @@ public class InfectionServiceImpl implements InfectionService{
 		id.join(user);
 	}
 
+	@Override
+	public int idChk(String id2) {
+		int idChk = id.idChk(id2);
+		return idChk;
+	}
+
 }
