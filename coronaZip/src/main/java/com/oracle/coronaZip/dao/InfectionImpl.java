@@ -24,6 +24,7 @@ import org.w3c.dom.Element;
 
 import com.oracle.coronaZip.model.Infection;
 import com.oracle.coronaZip.model.News;
+import com.oracle.coronaZip.model.User;
 
 @Repository
 public class InfectionImpl implements InfectionDao {
@@ -177,6 +178,11 @@ public class InfectionImpl implements InfectionDao {
         	news.add(ns);
         }
 		return news;
+	}
+
+	@Override
+	public void join(User user) {
+		session.insert("join", user);
 	}
 
 }

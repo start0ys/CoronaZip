@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.oracle.coronaZip.dao.InfectionDao;
 import com.oracle.coronaZip.model.Infection;
 import com.oracle.coronaZip.model.News;
+import com.oracle.coronaZip.model.User;
 
 @Service
 public class InfectionServiceImpl implements InfectionService{
@@ -31,6 +32,11 @@ public class InfectionServiceImpl implements InfectionService{
 	public List<News> news() {
 		List<News> news = id.news();
 		return news;
+	}
+
+	@Override
+	public void join(User user) {
+		id.join(user);
 	}
 
 }

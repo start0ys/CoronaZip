@@ -73,42 +73,48 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </ul>
 
   <div style="text-align: center; margin-top: 30px;">
-    <form action="">
+    <form action="/join" method="post">
         <table border="1" style="border: none; margin: 0 auto; width: 80%;">
-          <tr><th>이름</th><td><input type="text" style="margin-left: 7px;"></td></tr>
-          <tr><th>생년월일</th><td><input type="text" style="margin-left: 7px;"></td></tr>
+          <tr><th>이름</th><td><input type="text" name="name" required="required" style="margin-left: 7px;"></td></tr>
+          <tr>
+          	<th>생년월일</th>
+          	<td>
+          		<input type="text" name="birth" maxlength="6" required="required" style="margin-left: 7px;">
+          		<span style="margin-left: 17px; font-size: 13px; color: #adacac;">ex)960307</span>
+          	</td>
+          </tr>
           <tr>
             <th>성별</th>
             <td>
-              <input type="radio" style="margin-left: 63px;">남자&nbsp;&nbsp;
-              <input type="radio">여자
+              <input type="radio" name="sex" value="남자" style="margin-left: 63px;">남자&nbsp;&nbsp;
+              <input type="radio" name="sex" value="여자">여자
             </td>
           </tr>
-          <tr><th>아이디</th><td><input type="text" style="margin-left: 7px;"><button>중복확인</button></td></tr>
-          <tr><th>비밀번호</th><td><input type="text" style="margin-left: 7px;"></td></tr>
-          <tr><th>비밀번호 확인</th><td><input type="text" style="margin-left: 7px;"></td></tr>
-          <tr><th>닉네임</th><td><input type="text" style="margin-left: 7px;"></td></tr>
-          <tr><th>이메일</th><td><input type="text" style="margin-left: 7px;"></td></tr>
+          <tr><th>아이디</th><td><input type="text" name="id" required="required" style="margin-left: 7px;"><button>중복확인</button></td></tr>
+          <tr><th>비밀번호</th><td><input type="password" name="pw" required="required" style="margin-left: 7px;"></td></tr>
+          <tr><th>비밀번호 확인</th><td><input type="password" name="pw2" required="required" style="margin-left: 7px;"></td></tr>
+          <tr><th>닉네임</th><td><input type="text" name="nickname" required="required" style="margin-left: 7px;"></td></tr>
+          <tr><th>이메일</th><td><input type="email" name="email" required="required" style="margin-left: 7px;"></td></tr>
           <tr>
             <th>주소</th>
             <td>
-              <input type="text" id="ps_addr" name="ps_addr" readonly="readonly" style="margin-left: 7px; width: 25%;">
+              <input type="text" id="postcode" name="postcode" readonly="readonly" placeholder="우편번호" style="margin-left: 7px; width: 90px;">
               <input type="button" value="우편번호" onclick="findAddr()"><br>
-              <input type="text" id="bs_addr" name="bs_addr" readonly="readonly" placeholder="기본주소" style="margin-left: 7px; width: 85%;"><br>
-              <input type="text" id="dt_addr" name="dt_addr" placeholder="상세주소" style="margin-left: 7px; width: 85%;">
+              <input type="text" id="bs_addr" name="bs_addr" readonly="readonly" placeholder="주소" style="margin-left: 7px; width: 400px;"><br>
+              <input type="text" id="dt_addr" name="dt_addr" placeholder="상세주소" required="required" style="margin-left: 7px; width: 400px;">
             </td>
           </tr>
           <tr>
-            <th>백신유무</th>
+            <th>백신접종</th>
             <td>
-              <select style="margin-left: 7px;">
-                <option>미접종</option>
-                <option>화이자-1차</option>
-                <option>화이자-2차</option>
-                <option>모더나-1차</option>
-                <option>모더나-2차</option>
-                <option>AZ-1차</option>
-                <option>AZ-2차</option>
+              <select style="margin-left: 7px;" name="vaccine">
+                <option value="미접종">미접종</option>
+                <option value="화이자-1차">화이자-1차</option>
+                <option value="화이자-2차">화이자-2차</option>
+                <option value="모더나-1차">모더나-1차</option>
+                <option value="모더나-2차">모더나-2차</option>
+                <option value="AZ-1차">AZ-1차</option>
+                <option value="AZ-2차">AZ-2차</option>
               </select>
             </td>
           </tr>
@@ -137,7 +143,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
           oncomplete: function(data) {
         	  var roadAddr = data.roadAddress; // 도로명 주소 변수
               var jibunAddr = data.jibunAddress; // 지번 주소 변수
-        	  document.getElementById('ps_addr').value = data.zonecode;
+        	  document.getElementById('postcode').value = data.zonecode;
               if(roadAddr !== ''){
                   document.getElementById('bs_addr').value = roadAddr;
               } 

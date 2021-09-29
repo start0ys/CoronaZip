@@ -4,11 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.oracle.coronaZip.model.Infection;
 import com.oracle.coronaZip.model.News;
+import com.oracle.coronaZip.model.User;
 import com.oracle.coronaZip.service.InfectionService;
 
 import java.net.HttpURLConnection;
@@ -84,6 +86,13 @@ public class CzController {
 	@GetMapping(value = "join")
 	public String join() {
 		return "join";
+	}
+	
+	@PostMapping(value = "join")
+	public String join2(User user) {
+		user.setAddress(user.getBs_addr() + " " + user.getDt_addr());
+		is.join(user);
+		return "redirect:/";
 	}
 	
 	
