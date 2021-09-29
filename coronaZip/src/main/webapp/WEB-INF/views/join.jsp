@@ -91,8 +91,14 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             </td>
           </tr>
           <tr><th>아이디</th><td><input type="text" name="id" required="required" style="margin-left: 7px;"><button>중복확인</button></td></tr>
-          <tr><th>비밀번호</th><td><input type="password" name="pw" required="required" style="margin-left: 7px;"></td></tr>
-          <tr><th>비밀번호 확인</th><td><input type="password" name="pw2" required="required" style="margin-left: 7px;"></td></tr>
+          <tr><th>비밀번호</th><td><input type="password" id="pw" name="pw" required="required" style="margin-left: 7px;"></td></tr>
+          <tr>
+         	 <th>비밀번호 확인</th>
+         	 <td>
+         	 	<input type="password" id="pw2" name="pw2" required="required" onkeyup="pwChk()" style="margin-left: 7px;">
+         	 	<span id="pwAlert"></span>
+         	 </td>
+          </tr>
           <tr><th>닉네임</th><td><input type="text" name="nickname" required="required" style="margin-left: 7px;"></td></tr>
           <tr><th>이메일</th><td><input type="email" name="email" required="required" style="margin-left: 7px;"></td></tr>
           <tr>
@@ -168,10 +174,26 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			alert("백신접종 여부를 선택해주세요");
 			return false;
 		}
+		if(frm.pw.value != frm.pw2.value){
+			alert("비밀번호가 일치하지 않습니다");
+			return false;
+		}
 		return true;
   }
   function vc(){
 	  $("#vaccine option[value='선택']").remove();
+  }
+  function pwChk(){
+	  var pwAlert = document.getElementById('pwAlert');
+	  var pw = document.getElementById('pw').value;
+	  var pw2 = document.getElementById('pw2').value;
+	  if(pw == pw2){
+		  pwAlert.innerHTML = "비밀번호가 일치합니다.";
+		  pwAlert.style.color = "#08A600";
+	  }else if(pw != pw2){
+		  pwAlert.innerHTML = "비밀번호가 일치하지 않습니다.";
+		  pwAlert.style.color = "red";
+	  }
   }
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
