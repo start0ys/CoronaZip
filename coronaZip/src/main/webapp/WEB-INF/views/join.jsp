@@ -92,9 +92,10 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
           <tr>
             <th>주소</th>
             <td>
-              <input type="text" id="ps_addr" readonly style="margin-left: 7px; width: 25%;"><button onclick="findAddr()">우편번호</button><br>
-              <input type="text" id="bs_addr" readonly placeholder="기본주소" style="margin-left: 7px; width: 85%;"><br>
-              <input type="text" id="dt_addr" placeholder="상세주소" style="margin-left: 7px; width: 85%;">
+              <input type="text" id="ps_addr" name="ps_addr" readonly="readonly" style="margin-left: 7px; width: 25%;">
+              <input type="button" value="우편번호" onclick="findAddr()"><br>
+              <input type="text" id="bs_addr" name="bs_addr" readonly="readonly" placeholder="기본주소" style="margin-left: 7px; width: 85%;"><br>
+              <input type="text" id="dt_addr" name="dt_addr" placeholder="상세주소" style="margin-left: 7px; width: 85%;">
             </td>
           </tr>
           <tr>
@@ -134,21 +135,16 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   function findAddr(){
     new daum.Postcode({
           oncomplete: function(data) {
-            
-            console.log(data);      
-              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-              // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-              // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-              var roadAddr = data.roadAddress; // 도로명 주소 변수
+        	  var roadAddr = data.roadAddress; // 도로명 주소 변수
               var jibunAddr = data.jibunAddress; // 지번 주소 변수
-              // 우편번호와 주소 정보를 해당 필드에 넣는다.
-              document.getElementById('ps_addr').value = data.zonecode;
+        	  document.getElementById('ps_addr').value = data.zonecode;
               if(roadAddr !== ''){
-                  document.getElementById("bs_addr").value = roadAddr;
+                  document.getElementById('bs_addr').value = roadAddr;
               } 
               else if(jibunAddr !== ''){
-                  document.getElementById("bs_addr").value = jibunAddr;
+                  document.getElementById('bs_addr').value = jibunAddr;
               }
+              document.getElementById('dt_addr').focus();
           }
       }).open();
   }
