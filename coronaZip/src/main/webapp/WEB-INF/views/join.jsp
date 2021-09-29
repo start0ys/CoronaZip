@@ -73,7 +73,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </ul>
 
   <div style="text-align: center; margin-top: 30px;">
-    <form action="/join" method="post">
+    <form action="/join" method="post" name="frm" onsubmit="return subChk()">
         <table border="1" style="border: none; margin: 0 auto; width: 80%;">
           <tr><th>이름</th><td><input type="text" name="name" required="required" style="margin-left: 7px;"></td></tr>
           <tr>
@@ -107,7 +107,8 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
           <tr>
             <th>백신접종</th>
             <td>
-              <select style="margin-left: 7px;" name="vaccine">
+              <select style="margin-left: 7px;" id="vaccine" name="vaccine" onchange="vc()" required="required">
+                <option value="선택" selected="selected">선택</option>
                 <option value="미접종">미접종</option>
                 <option value="화이자-1차">화이자-1차</option>
                 <option value="화이자-2차">화이자-2차</option>
@@ -153,6 +154,24 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
               document.getElementById('dt_addr').focus();
           }
       }).open();
+  }
+  function subChk() {
+		if(!frm.sex.value){
+			alert("성별을 선택해주세요");
+			return false;
+		}
+		if(!frm.postcode.value){
+			alert("주소를 작성해주세요");
+			return false;
+		}
+		if(frm.vaccine.value == '선택'){
+			alert("백신접종 여부를 선택해주세요");
+			return false;
+		}
+		return true;
+  }
+  function vc(){
+	  $("#vaccine option[value='선택']").remove();
   }
 </script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
