@@ -72,9 +72,13 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <li><a href="#"><i class='far fa-envelope' style='font-size:15px'></i> 쪽지함</a></li>
     </ul>
 
-  <div style="text-align: center; margin-top: 30px;">
+  <div style="text-align: center; margin-top: 30px; margin-bottom: 60px;">
     <form action="/join" method="post" name="frm" onsubmit="return subChk()">
-        <table border="1" style="border: none; margin: 0 auto; width: 80%;">
+    	<div style="margin: 37px 0px;">
+          	<h2 style="font-weight: bold;">회원가입</h2>
+          	<p style="color: #918f8f;">회원가입을 통해 회원들과 다양한 코로나 정보를 공유해보세요.</p>
+        </div>  
+        <table style="border: none; margin: 0 auto; width: 80%;" border="1">
           <tr><th>이름</th><td><input type="text" name="name" required="required" style="margin-left: 7px;"></td></tr>
           <tr>
           	<th>생년월일</th>
@@ -86,7 +90,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
           <tr>
             <th>성별</th>
             <td>
-              <input type="radio" name="sex" value="남자" style="margin-left: 63px;">남자&nbsp;&nbsp;
+              <input type="radio" name="sex" value="남자" style="margin-left: 10px;">남자&nbsp;&nbsp;
               <input type="radio" name="sex" value="여자">여자
             </td>
           </tr>
@@ -95,7 +99,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	          <td>
 	          	<input type="text" id="id" name="id" required="required" style="margin-left: 7px;">
 	          	<input type="hidden" id="sameChk" name="sameChk" value="0">
-	          	<input type="button" value="중복확인" onclick="idChk()">
+	          	<input type="button" value="✔️중복확인" onclick="idChk()">
 	          	<span id="idAlert"></span>
 	          </td>
           </tr>
@@ -111,10 +115,10 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
           <tr><th>이메일</th><td><input type="email" name="email" required="required" style="margin-left: 7px;"></td></tr>
           <tr>
             <th>주소</th>
-            <td>
+            <td style="padding: 7px 0px;">
               <input type="text" id="postcode" name="postcode" readonly="readonly" placeholder="우편번호" style="margin-left: 7px; width: 90px;">
-              <input type="button" value="우편번호" onclick="findAddr()"><br>
-              <input type="text" id="bs_addr" name="bs_addr" readonly="readonly" placeholder="주소" style="margin-left: 7px; width: 400px;"><br>
+              <input type="button" value="🔍️주소검색" onclick="findAddr()"><br>
+              <input type="text" id="bs_addr" name="bs_addr" readonly="readonly" placeholder="주소" style="margin-left: 7px; width: 400px; margin-top: 4px; margin-bottom: 4px;"><br>
               <input type="text" id="dt_addr" name="dt_addr" placeholder="상세주소" required="required" style="margin-left: 7px; width: 400px;">
             </td>
           </tr>
