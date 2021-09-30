@@ -205,4 +205,10 @@ public class InfectionImpl implements InfectionDao {
 		return result;
 	}
 
+	@Override
+	public User user(String id2) {
+		User user = session.selectOne("user", id2);
+		return user;
+	}
+
 }

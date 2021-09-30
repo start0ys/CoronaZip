@@ -9,6 +9,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&effect=shadow-multiple">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<c:if test="${not empty user }">
+	<script type="text/javascript">
+		alert("로그인 상태에서는 로그인을 이용할수없습니다.");
+		history.go(-1);
+	</script>
+</c:if>
 <style>
 body{
     margin: 0;

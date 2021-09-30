@@ -51,4 +51,10 @@ public class InfectionServiceImpl implements InfectionService{
 		return login;
 	}
 
+	@Override
+	public User user(String id2) {
+		User user = id.user(id2);
+		return user;
+	}
+
 }

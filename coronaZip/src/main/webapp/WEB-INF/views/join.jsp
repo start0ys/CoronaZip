@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +15,12 @@
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=9617e5ff316756ebbb3a571e76b07bbb&libraries=clusterer"></script>
 <script type="text/javascript"
 src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<c:if test="${not empty user }">
+	<script type="text/javascript">
+		alert("로그인 상태에서는 회원가입을 이용할수없습니다.");
+		history.go(-1);
+	</script>
+</c:if>
 <style>
   .w3-lobster {
     font-family: "Lobster", Sans-serif;

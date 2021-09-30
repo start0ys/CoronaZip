@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -45,7 +46,7 @@ public class CzController {
 	@Autowired
 	private InfectionService is;
 	
-	@GetMapping(value = "/")
+	@GetMapping(value = "index")
 	public String main(Model model) throws Exception {
 		//오늘 날짜
 		Date date = new Date();
@@ -87,13 +88,15 @@ public class CzController {
 	}
 	
 	@PostMapping(value = "login")
-	public String login2(User user, Model model) {
+	public String login2(HttpSession session, User user, Model model) {
 		int result = is.login(user);
 		if(result == 1 || result == 2) {
 			model.addAttribute("result",result);
 			return "loginFail";
 		}else {
-			return "redirect:/";		
+			User user2 = is.user(user.getId());
+			session.setAttribute("user", user2);
+			return "redirect:/index";		
 		}			
 	}
 	
@@ -106,7 +109,7 @@ public class CzController {
 	public String join2(User user) {
 		user.setAddress(user.getBs_addr() + " " + user.getDt_addr());
 		is.join(user);
-		return "redirect:/";
+		return "redirect:/index";
 	}
 	
 	@ResponseBody

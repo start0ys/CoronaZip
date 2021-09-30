@@ -47,7 +47,7 @@
       <span><span style="color: #8fd5ff;" class="w3-xxlarge font-effect-shadow-multiple">CORONA</span><span style="font-size: 20px;">.ZIP</span></span>
     </div>
     <ul class="nav navbar-nav navbar-right">
-      <c:if test="${empty result }">
+      <c:if test="${empty user }">
 	      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
    		  <li><a href="/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       </c:if>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,8 +41,10 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	      <span><span style="color: #8fd5ff;" class="w3-xxlarge font-effect-shadow-multiple">CORONA</span><span style="font-size: 20px;">.ZIP</span></span>
 	    </div>
 	    <ul class="nav navbar-nav navbar-right">
-	        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-	        <li><a href="/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		    <c:if test="${empty user }">
+		        <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		        <li><a href="/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		    </c:if>
 	    </ul>
 	    <ul class="nav nav-tabs">
 	        <li><a href="/"><i class='fas fa-home' style='font-size:15px'></i> Home</a></li>

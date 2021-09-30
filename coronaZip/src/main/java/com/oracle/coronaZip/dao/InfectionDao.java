@@ -13,4 +13,5 @@ public interface InfectionDao {
 	void            join(User user);
 	int             idChk(String id2);
 	int             login(User user);
+	User            user(String id2);
 }
