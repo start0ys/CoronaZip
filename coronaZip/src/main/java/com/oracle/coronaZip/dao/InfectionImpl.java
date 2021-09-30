@@ -191,4 +191,18 @@ public class InfectionImpl implements InfectionDao {
 		return idChk;
 	}
 
+	@Override
+	public int login(User user) {
+		int result = 0;
+		String pw = session.selectOne("login", user);
+		if(pw == null || pw.equals("")) {
+			result = 1;
+		}else if(!pw.equals(user.getPw())) {
+			result = 2;
+		}else if(pw.equals(user.getPw())) {
+			result = 3;
+		}
+		return result;
+	}
+
 }

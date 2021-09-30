@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&effect=shadow-multiple">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
- <style>
+<style>
 body{
     margin: 0;
     padding: 0;
@@ -58,10 +59,10 @@ a{
             </div>
         </div>
         <div style="width: 80%; margin: 0 auto; border: 0.1px solid rgb(175, 169, 169);">
-            <form action="" style="text-align: center;">
+            <form action="/login" method="post" style="text-align: center;">
                 <div><input type="text" name="id" placeholder="👤아이디" style="margin-top: 40px; margin-bottom: 13px;"></div>
                 <div><input type="password" name="pw" placeholder="🔑비밀번호"></div>
-                <button type="submit" class="btn btn-info" style="width: 65%; margin-top: 13px; margin-bottom: 40px; height: 50px;">로그인</button>
+                <input type="submit" value="로그인" class="btn btn-info" style="width: 65%; margin-top: 13px; margin-bottom: 40px; height: 50px;">
             </form>
         </div>
         <div style="text-align: center; margin-top: 20px;">

@@ -12,4 +12,5 @@ public interface InfectionService {
 	List<News>      news();
 	void            join(User user);
 	int             idChk(String id2);
+	int             login(User user);
 }

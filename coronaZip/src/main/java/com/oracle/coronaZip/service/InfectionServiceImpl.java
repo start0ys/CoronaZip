@@ -45,4 +45,10 @@ public class InfectionServiceImpl implements InfectionService{
 		return idChk;
 	}
 
+	@Override
+	public int login(User user) {
+		int login = id.login(user);
+		return login;
+	}
+
 }

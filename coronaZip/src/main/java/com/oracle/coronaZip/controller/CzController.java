@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -35,6 +36,7 @@ import org.json.XML;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.python.antlr.base.mod;
 import org.python.util.PythonInterpreter;
 
 @Controller
@@ -82,6 +84,17 @@ public class CzController {
 	@GetMapping(value = "login")
 	public String login() {
 		return "login";
+	}
+	
+	@PostMapping(value = "login")
+	public String login2(User user, Model model) {
+		int result = is.login(user);
+		if(result == 1 || result == 2) {
+			model.addAttribute("result",result);
+			return "loginFail";
+		}else {
+			return "redirect:/";		
+		}			
 	}
 	
 	@GetMapping(value = "join")
