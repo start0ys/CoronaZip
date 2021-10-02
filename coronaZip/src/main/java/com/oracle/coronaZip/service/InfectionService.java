@@ -14,4 +14,7 @@ public interface InfectionService {
 	int             idChk(String id2);
 	int             login(User user);
 	User            user(String id2);
+	String          findId(User user);
+	String          findPw(User user);
+	void            updatePw(User user);
 }

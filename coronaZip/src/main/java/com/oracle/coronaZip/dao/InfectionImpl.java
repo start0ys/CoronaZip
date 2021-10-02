@@ -211,4 +211,21 @@ public class InfectionImpl implements InfectionDao {
 		return user;
 	}
 
+	@Override
+	public String findId(User user) {
+		String findId = session.selectOne("findId", user);
+		return findId;
+	}
+
+	@Override
+	public String findPw(User user) {
+		String findPw = session.selectOne("findPw", user);
+		return findPw;
+	}
+
+	@Override
+	public void updatePw(User user) {
+		session.update("updatePw", user);
+	}
+
 }

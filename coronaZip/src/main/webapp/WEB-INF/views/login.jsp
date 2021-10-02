@@ -49,11 +49,22 @@ input{
     font-size: 15px;
     border: 0.5px solid gray;
 }
-a{
-    color: black;
-    text-decoration: none;
+.find:hover{
+	color: #337ab7;
 }
 </style>
+<script type="text/javascript">
+	function findId(){
+		var popupX = (document.body.offsetWidth / 2) - (200 / 2);
+		var popupY= (window.screen.height / 2) - (300 / 2);
+		window.open("/findId","","width=500,height=300, left="+ popupX + ", top="+ popupY);
+	}
+	function findPw(){
+		var popupX = (document.body.offsetWidth / 2) - (200 / 2);
+		var popupY= (window.screen.height / 2) - (300 / 2);
+		window.open("/findPw","","width=500,height=300, left="+ popupX + ", top="+ popupY);
+	}
+</script>
 </head>
 <body>
     <div id="wrapper">
@@ -72,7 +83,7 @@ a{
             </form>
         </div>
         <div style="text-align: center; margin-top: 20px;">
-            <a href="findId">아이디 찾기</a> | <a href="findPw">비밀번호 찾기</a>
+            <span class="find" onclick="findId()">아이디 찾기</span> | <span class="find" onclick="findPw()">비밀번호 찾기</span>
         </div>
     </div>
 </body>

@@ -16,4 +16,13 @@
 	<select id="user" resultType="User" parameterType="String">
 		select * from member where id = #{id2}
 	</select>
+	<select id="findId" resultType="String" parameterType="User">
+		select id from member where name = #{name} and email = #{email}
+	</select>
+	<select id="findPw" resultType="String" parameterType="User">
+		select email from member where id = #{id} and email = #{email}
+	</select>
+	<update id="updatePw" parameterType="User">
+		update member set pw = #{pw} where email = #{email} 
+	</update>
 </mapper>
