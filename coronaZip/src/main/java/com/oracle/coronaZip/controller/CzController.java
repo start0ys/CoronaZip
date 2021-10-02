@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -99,6 +100,13 @@ public class CzController {
 			return "redirect:/index";		
 		}			
 	}
+
+	@GetMapping(value = "logout")
+    public String logout(HttpSession session , HttpServletRequest request) {
+        session.invalidate(); 
+        String referer = request.getHeader("Referer");
+        return "redirect:"+ referer;
+    }
 	
 	@GetMapping(value = "join")
 	public String join() {

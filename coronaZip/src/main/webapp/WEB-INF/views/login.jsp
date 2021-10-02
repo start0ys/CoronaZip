@@ -72,7 +72,7 @@ a{
             </form>
         </div>
         <div style="text-align: center; margin-top: 20px;">
-            <a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a>
+            <a href="findId">아이디 찾기</a> | <a href="findPw">비밀번호 찾기</a>
         </div>
     </div>
 </body>

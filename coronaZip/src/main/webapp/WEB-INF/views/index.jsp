@@ -51,19 +51,31 @@
 	      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
    		  <li><a href="/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       </c:if>
+      <c:if test="${not empty user }">
+	      <span style="color: #717171;">[${user.vaccine }]${user.nickname } 님 반갑습니다.</span>
+	      <span style="margin-right: 25px; margin-left: 7px;"><a href="/logout" style="text-decoration: none;">로그아웃</a></span>
+      </c:if>
     </ul>
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#"><i class='fas fa-home' style='font-size:15px'></i> Home</a></li>
+      <li class="active"><a href="/index"><i class='fas fa-home' style='font-size:15px'></i> Home</a></li>
       <li><a href="/center"><i class='fas fa-map-marker-alt' style='font-size:15px'></i> 예방접종센터</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class='fas fa-globe' style='font-size:15px'></i> 커뮤니티<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">코로나 증상</a></li>
-          <li><a href="#">백신 후기</a></li>
-          <li><a href="#">자유게시판</a></li>                        
+        <ul class="dropdown-menu" style="color: #337ab7;">
+          <li><a href="/symptom"><i class="fas fa-head-side-virus"></i> &nbsp;코로나 증상</a></li>
+          <li><a href="/review"><i class="fas fa-comment-medical"></i> &nbsp;백신 후기</a></li>
+          <li><a href="/free"><i class="fas fa-users"></i> &nbsp;자유게시판</a></li>                        
         </ul>
       </li>
-      <li><a href="#"><i class='far fa-envelope' style='font-size:15px'></i> 쪽지함</a></li>
+      <c:if test="${not empty user }">
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-user-circle"></i> 마이페이지<span class="caret"></span></a>
+        <ul class="dropdown-menu" style="color: #337ab7;">
+          <li><a href="/update"><i class="fas fa-address-card"></i> &nbsp;정보수정</a></li>
+          <li><a href="/msg"><i class="fas fa-envelope"></i> &nbsp;쪽지함</a></li>  
+        </ul>
+      </li>
+      </c:if>
     </ul>
 
 
