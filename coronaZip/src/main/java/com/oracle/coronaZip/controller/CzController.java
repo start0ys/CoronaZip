@@ -1,6 +1,8 @@
 package com.oracle.coronaZip.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.XMLConstants;
@@ -125,6 +129,47 @@ public class CzController {
 	public int idChk(String id2) {
 		int idChk = is.idChk(id2);
 		return idChk;
+	}
+	
+	@GetMapping(value = "findId")
+	public String findId() {
+		return "findId";
+	}
+	@PostMapping(value = "findId")
+	public String findId(User user, Model model) {
+		String result = is.findId(user);
+		model.addAttribute("result", result);
+		return "findIdResult";
+	}
+	@GetMapping(value = "findPw")
+	public String findPw() {
+		return "findPw";
+	}
+	@Autowired
+	private JavaMailSender mailSender;
+	@PostMapping(value = "findPw")
+	public String findPw(User user,HttpServletRequest request, Model model) throws MessagingException {
+		String email = is.findPw(user);
+		int result = 0;
+		if(email == null || email.equals("")) {
+			result = 1;
+		}else {
+			User user2 = new User();
+			user2.setEmail(email);
+			user2.setPw((int)(Math.random() * 999999) + 1 + "");
+			is.updatePw(user2);
+			
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message,true,"UTF-8");
+			messageHelper.setFrom("kimstartmail@gmail.com");  // 보내는사람 생략하거나 하면 정삭작동을 안함
+			messageHelper.setTo(email);	 // 받는사람 이메일
+			messageHelper.setSubject("임시 비밀번호입니다."); // 메일제목은 생략이 가능하다.
+			messageHelper.setText("임시 비밀번호입니다 : " + user2.getPw()); // 메일 내용
+			mailSender.send(message);
+			result = 2;
+		}
+		model.addAttribute("result", result);
+		return "findPwResult";
 	}
 	
 	

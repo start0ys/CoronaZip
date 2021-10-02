@@ -57,4 +57,21 @@ public class InfectionServiceImpl implements InfectionService{
 		return user;
 	}
 
+	@Override
+	public String findId(User user) {
+		String findId = id.findId(user);
+		return findId;
+	}
+
+	@Override
+	public String findPw(User user) {
+		String findPw = id.findPw(user);
+		return findPw;
+	}
+
+	@Override
+	public void updatePw(User user) {
+		id.updatePw(user);
+	}
+
 }
