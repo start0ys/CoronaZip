@@ -155,7 +155,7 @@ public class CzController {
 			result = 1;
 		}else {
 			User user2 = new User();
-			user2.setEmail(email);
+			user2.setId(user.getId());
 			user2.setPw((int)(Math.random() * 999999) + 1 + "");
 			is.updatePw(user2);
 			

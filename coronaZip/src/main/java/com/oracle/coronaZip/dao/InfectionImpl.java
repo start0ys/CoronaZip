@@ -196,11 +196,11 @@ public class InfectionImpl implements InfectionDao {
 		int result = 0;
 		String pw = session.selectOne("login", user);
 		if(pw == null || pw.equals("")) {
-			result = 1;
+			result = 1;  //조회를 못한경우 -> 존재하지않는 아이디
 		}else if(!pw.equals(user.getPw())) {
-			result = 2;
+			result = 2;  //비밀번호가 다른경우
 		}else if(pw.equals(user.getPw())) {
-			result = 3;
+			result = 3;  //로그인 성공
 		}
 		return result;
 	}

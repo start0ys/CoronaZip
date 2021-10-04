@@ -23,6 +23,6 @@
 		select email from member where id = #{id} and email = #{email}
 	</select>
 	<update id="updatePw" parameterType="User">
-		update member set pw = #{pw} where email = #{email} 
+		update member set pw = #{pw} where id = #{id} 
 	</update>
 </mapper>
