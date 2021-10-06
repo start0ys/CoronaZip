@@ -77,9 +77,9 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class='fas fa-globe' style='font-size:15px'></i> 커뮤니티<span class="caret"></span></a>
         <ul class="dropdown-menu" style="color: #337ab7;">
-          <li><a href="/symptom"><i class="fas fa-head-side-virus"></i> &nbsp;코로나 증상</a></li>
-          <li><a href="/review"><i class="fas fa-comment-medical"></i> &nbsp;백신 후기</a></li>
-          <li><a href="/free"><i class="fas fa-users"></i> &nbsp;자유게시판</a></li>                        
+          <li><a href="/board?b_type=0"><i class="fas fa-head-side-virus"></i> &nbsp;코로나 증상</a></li>
+          <li><a href="/board?b_type=1"><i class="fas fa-comment-medical"></i> &nbsp;백신 후기</a></li>
+          <li><a href="/board?b_type=2"><i class="fas fa-users"></i> &nbsp;자유게시판</a></li>                      
         </ul>
       </li>
       <c:if test="${not empty user }">

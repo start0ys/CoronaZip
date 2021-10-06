@@ -50,6 +50,8 @@ public class CzController {
 	
 	@Autowired
 	private InfectionService is;
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	@GetMapping(value = "index")
 	public String main(Model model) throws Exception {
@@ -145,8 +147,7 @@ public class CzController {
 	public String findPw() {
 		return "findPw";
 	}
-	@Autowired
-	private JavaMailSender mailSender;
+
 	@PostMapping(value = "findPw")
 	public String findPw(User user,HttpServletRequest request, Model model) throws MessagingException {
 		String email = is.findPw(user);
@@ -170,6 +171,12 @@ public class CzController {
 		}
 		model.addAttribute("result", result);
 		return "findPwResult";
+	}
+	
+	@GetMapping(value = "board")
+	public String board(int b_type, Model model) {
+		model.addAttribute("b_type", b_type);
+		return "board";
 	}
 	
 	
