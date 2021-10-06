@@ -38,6 +38,57 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	  padding-top: 10px;
 	}
+	
+	.fileBox .fileName {
+		display:inline-block;
+		width:170px;
+		height:30px;
+		padding-left:10px;
+		margin-right:5px;
+		line-height:30px;
+		border:1px solid #aaa;
+		background-color:#fff;
+		vertical-align:middle;
+		border-radius: 10px;
+	}
+	.fileBox .btn_file {
+		display:inline-block;
+		border:2px solid #66677f;
+		border-top-width: 0px;
+		border-left-width: 0px;
+		width:100px;
+		height:30px;
+		line-height:30px;
+		text-align:center;
+		vertical-align:middle;
+		background-color: #3C3530;
+		color:white;
+		border-radius: 6px;
+	}
+	.fileBox input[type="file"] {
+		position:absolute;
+		width:1px;
+		height:1px;
+		padding:0;
+		margin:-1px;
+		overflow:hidden;
+		clip:rect(0,0,0,0);
+		border:0
+	}
+	 .fbtn{
+	   display:inline-block;
+		border:2px solid #66677f;
+		border-top-width: 0px;
+		border-left-width: 0px;
+		width:50px;
+		height:30px;
+		line-height:30px;
+		text-align:center;
+		vertical-align:middle;
+		background-color: #3C3530;
+		color:white;
+		border-radius: 6px;
+	 }
 </style>
 </head>
 <body>
@@ -78,16 +129,33 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       </c:if>
     </ul>
 	
-	<div>
-		<c:if test="${b_type == 0 }"><h2><i class="fas fa-head-side-virus"></i> &nbsp;코로나 증상</a></h2></c:if>
-		<c:if test="${b_type == 1 }"><h2><i class="fas fa-comment-medical"></i> &nbsp;백신 후기</a></h2></c:if>
-		<c:if test="${b_type == 2 }"><h2><i class="fas fa-users"></i> &nbsp;자유게시판</a></h2></c:if>
-		<table>
-			<tr>
-				
-			</tr>
-		</table>
-		<a href="/bWrite?b_type=${b_type }">글 작성</a>
+	<div style="margin: 70px 0px;">
+		<form action="" style="text-align: center; width: 80%; margin: 0 auto;">
+			<div>
+				<select name="b_type" style="width: 18%; height: 35px;">
+					<c:if test="${b_type == 0 }"><option value="0" selected="selected">코로나 증상</option></c:if>
+					<c:if test="${b_type == 1 }"><option value="1" selected="selected">백신 후기</option></c:if>
+					<c:if test="${b_type == 2 }"><option value="2" selected="selected">자유게시판</option></c:if>
+					<option value="0">코로나 증상</option>
+					<option value="1">백신 후기</option>
+					<option value="2">자유게시판</option>
+				</select>
+				<input type="text" name="b_title" placeholder="제목" style="width: 81%; height: 35px;">
+			</div>
+			<div>
+				<textarea rows="" cols="" name="b_content" style="width: 100%; margin-top: 10px;"></textarea>
+			</div>
+			<div style="float: right;">
+				<div class="fileBox">
+					<input type="text" class="fileName" readonly="readonly">
+					<label for="uploadBtn" class="btn_file">파일 업로드</label>
+					<input type="file" id="uploadBtn" class="uploadBtn" name="b_upload">
+					<label class="fbtn" onclick="fdel()">제거</label>
+				</div>
+			</div>
+		</form>
+
+	
 	</div>
 
 	
@@ -99,5 +167,44 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
 	</div>
 	
+	
+	<script type="text/javascript">
+		var obj = {};
+		$("select").children("option").each(function(){
+		 let val = $(this).attr("value");
+		 if(obj[val]){
+		   if($(this).is(":selected")){
+		    obj[val].remove();
+		    obj[val] = $(this);
+		   }else if(obj[val].is(":selected")){
+		    $(this).remove()
+		   }else{
+		    $(this).remove();
+		   }
+		 }
+		 obj[val] = $(this);
+		});	
+		
+		var uploadFile = $('.fileBox .uploadBtn');
+		uploadFile.on('change', function(){
+			if(window.FileReader){
+				var filename = $(this)[0].files[0].name;
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			}
+			$(this).siblings('.fileName').val(filename);
+		});
+		
+		function fdel(){
+		    $('.fileName').val('');
+			var agent = navigator.userAgent.toLowerCase();
+			//파일초기화
+			if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ) {
+				$("#uploadBtn").replaceWith($("#uploadBtn").clone(true));
+			}else{
+			    $("#uploadBtn").val("");
+			}	
+		}
+	</script>
 </body>
 </html>

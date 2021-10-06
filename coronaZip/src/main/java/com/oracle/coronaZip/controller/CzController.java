@@ -179,5 +179,10 @@ public class CzController {
 		return "board";
 	}
 	
+	@GetMapping(value = "bWrite")
+	public String write(int b_type, Model model) {
+		model.addAttribute("b_type", b_type);
+		return "bWrite";
+	}
 	
 }
