@@ -129,7 +129,9 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       </c:if>
     </ul>
 	
-	<div style="margin: 70px 0px;">
+	<div style="margin: 30px 0px 90px 0px;">
+		<h2 style="font-weight: bold; text-align: center;">글 작성</h2>
+        <p style="color: #918f8f; text-align: center; margin-bottom: 20px;">글 내용에 맞는 게시판을 선택하여 글을 작성해주세요.</p>
 		<form action="" style="text-align: center; width: 80%; margin: 0 auto;">
 			<div>
 				<select name="b_type" style="width: 18%; height: 35px;">
@@ -142,10 +144,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 				</select>
 				<input type="text" name="b_title" placeholder="제목" style="width: 81%; height: 35px;">
 			</div>
-			<div>
-				<textarea rows="" cols="" name="b_content" style="width: 100%; margin-top: 10px;"></textarea>
-			</div>
-			<div style="float: right;">
+			<div style="float: right; margin: 5px 0px;">
 				<div class="fileBox">
 					<input type="text" class="fileName" readonly="readonly">
 					<label for="uploadBtn" class="btn_file">파일 업로드</label>
@@ -153,6 +152,10 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 					<label class="fbtn" onclick="fdel()">제거</label>
 				</div>
 			</div>
+			<div>
+				<textarea rows="" cols="" name="b_content" style="width: 100%;"></textarea>
+			</div>
+			<div style="float: right;"><input type="submit" value="작성" class="btn btn-info"></div>
 		</form>
 
 	
