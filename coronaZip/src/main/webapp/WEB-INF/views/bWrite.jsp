@@ -15,6 +15,8 @@
 <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=9617e5ff316756ebbb3a571e76b07bbb&libraries=clusterer"></script>
 <script type="text/javascript"
 src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <c:if test="${empty user }">
 	<script type="text/javascript">
 		alert("커뮤니티는 로그인 후에 이용할수있습니다.");
@@ -132,7 +134,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<div style="margin: 30px 0px 90px 0px;">
 		<h2 style="font-weight: bold; text-align: center;">글 작성</h2>
         <p style="color: #918f8f; text-align: center; margin-bottom: 20px;">글 내용에 맞는 게시판을 선택하여 글을 작성해주세요.</p>
-		<form action="" style="text-align: center; width: 80%; margin: 0 auto;">
+		<form action="" method="post" id="frm" style="text-align: center; width: 80%; margin: 0 auto;">
 			<div>
 				<select name="b_type" style="width: 18%; height: 35px;">
 					<c:if test="${b_type == 0 }"><option value="0" selected="selected">코로나 증상</option></c:if>
@@ -153,9 +155,9 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 				</div>
 			</div>
 			<div>
-				<textarea rows="" cols="" name="b_content" style="width: 100%;"></textarea>
+				<textarea id="b_content"  name="b_content" style="width: 100%;"></textarea>
 			</div>
-			<div style="float: right;"><input type="submit" value="작성" class="btn btn-info"></div>
+			<div style="float: right;"><input type="button" onclick="save();" value="작성" class="btn btn-info"></div>
 		</form>
 
 	
@@ -207,6 +209,26 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			}else{
 			    $("#uploadBtn").val("");
 			}	
+		}
+		
+		var oEditors = [];
+		nhn.husky.EZCreator.createInIFrame({
+		    oAppRef: oEditors,
+		    elPlaceHolder: "b_content",  //textarea ID 입력
+		    sSkinURI: "/smarteditor/SmartEditor2Skin.html",  //martEditor2Skin.html 경로 입력
+		    fCreator: "createSEditor2",
+		    htParams : { 
+		        bUseToolbar : true,           // 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
+				bUseVerticalResizer : false,  // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
+				bUseModeChanger : false       // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
+		    }
+		});
+		
+		var frm = document.getElementById("frm");
+		function save(){
+			oEditors.getById["b_content"].exec("UPDATE_CONTENTS_FIELD", []);  //스마트 에디터 값을 텍스트컨텐츠로 전달
+			frm.submit(); // submit
+			return; 
 		}
 	</script>
 </body>
