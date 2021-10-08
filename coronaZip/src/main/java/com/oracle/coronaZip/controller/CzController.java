@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Infection;
 import com.oracle.coronaZip.model.News;
 import com.oracle.coronaZip.model.User;
@@ -183,6 +184,13 @@ public class CzController {
 	public String write(int b_type, Model model) {
 		model.addAttribute("b_type", b_type);
 		return "bWrite";
+	}
+	
+	@PostMapping(value = "bWrite")
+	public String write(Board board, Model model) {
+		is.bWrite(board);
+		model.addAttribute("b_type", board.getB_type());
+		return "board";
 	}
 	
 }

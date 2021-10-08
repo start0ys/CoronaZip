@@ -2,6 +2,7 @@ package com.oracle.coronaZip.service;
 
 import java.util.List;
 
+import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Infection;
 import com.oracle.coronaZip.model.News;
 import com.oracle.coronaZip.model.User;
@@ -17,4 +18,5 @@ public interface InfectionService {
 	String          findId(User user);
 	String          findPw(User user);
 	void            updatePw(User user);
+	void			bWrite(Board board);
 }

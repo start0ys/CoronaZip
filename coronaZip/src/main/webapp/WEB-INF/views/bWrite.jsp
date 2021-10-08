@@ -134,7 +134,9 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<div style="margin: 30px 0px 90px 0px;">
 		<h2 style="font-weight: bold; text-align: center;">글 작성</h2>
         <p style="color: #918f8f; text-align: center; margin-bottom: 20px;">글 내용에 맞는 게시판을 선택하여 글을 작성해주세요.</p>
-		<form action="" method="post" id="frm" style="text-align: center; width: 80%; margin: 0 auto;">
+		<form action="/bWrite" method="post" id="frm" style="text-align: center; width: 80%; margin: 0 auto;">
+			<input type="hidden" name="id" value="${user.id }">
+			<input type="hidden" name="b_nickname" value="[${user.vaccine }]${user.nickname }">
 			<div>
 				<select name="b_type" style="width: 18%; height: 35px;">
 					<c:if test="${b_type == 0 }"><option value="0" selected="selected">코로나 증상</option></c:if>
@@ -150,7 +152,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 				<div class="fileBox">
 					<input type="text" class="fileName" readonly="readonly">
 					<label for="uploadBtn" class="btn_file">파일 업로드</label>
-					<input type="file" id="uploadBtn" class="uploadBtn" name="b_upload">
+					<input type="file" id="uploadBtn" class="uploadBtn" name="file1">
 					<label class="fbtn" onclick="fdel()">제거</label>
 				</div>
 			</div>

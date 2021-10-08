@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.oracle.coronaZip.dao.InfectionDao;
+import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Infection;
 import com.oracle.coronaZip.model.News;
 import com.oracle.coronaZip.model.User;
@@ -72,6 +73,11 @@ public class InfectionServiceImpl implements InfectionService{
 	@Override
 	public void updatePw(User user) {
 		id.updatePw(user);
+	}
+
+	@Override
+	public void bWrite(Board board) {
+		id.bWrite(board);
 	}
 
 }

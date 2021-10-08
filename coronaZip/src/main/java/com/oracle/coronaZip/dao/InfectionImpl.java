@@ -22,6 +22,7 @@ import org.springframework.stereotype.Repository;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Infection;
 import com.oracle.coronaZip.model.News;
 import com.oracle.coronaZip.model.User;
@@ -226,6 +227,11 @@ public class InfectionImpl implements InfectionDao {
 	@Override
 	public void updatePw(User user) {
 		session.update("updatePw", user);
+	}
+
+	@Override
+	public void bWrite(Board board) {
+		session.insert("bWrite", board);
 	}
 
 }
