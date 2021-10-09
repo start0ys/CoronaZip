@@ -91,6 +91,9 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		color:white;
 		border-radius: 6px;
 	 }
+	 iframe {
+	 	height: 442px;
+	 }
 </style>
 </head>
 <body>
@@ -217,11 +220,11 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		nhn.husky.EZCreator.createInIFrame({
 		    oAppRef: oEditors,
 		    elPlaceHolder: "b_content",  //textarea ID 입력
-		    sSkinURI: "/smarteditor/SmartEditor2Skin.html",  //martEditor2Skin.html 경로 입력
+		    sSkinURI: "/smarteditor/SmartEditor2Skin.html?ver=6",  //martEditor2Skin.html 경로 입력
 		    fCreator: "createSEditor2",
 		    htParams : { 
 		        bUseToolbar : true,           // 툴바 사용 여부 (true:사용/ false:사용하지 않음) 
-				bUseVerticalResizer : false,  // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
+				bUseVerticalResizer : true,  // 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음) 
 				bUseModeChanger : false       // 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음) 
 		    }
 		});
