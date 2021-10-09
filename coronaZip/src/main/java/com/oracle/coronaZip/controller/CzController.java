@@ -16,7 +16,9 @@ import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Infection;
 import com.oracle.coronaZip.model.News;
 import com.oracle.coronaZip.model.User;
+import com.oracle.coronaZip.service.BoardService;
 import com.oracle.coronaZip.service.InfectionService;
+import com.oracle.coronaZip.service.Paging;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -51,6 +53,8 @@ public class CzController {
 	
 	@Autowired
 	private InfectionService is;
+	@Autowired
+	private BoardService bs;
 	@Autowired
 	private JavaMailSender mailSender;
 	
@@ -175,7 +179,18 @@ public class CzController {
 	}
 	
 	@GetMapping(value = "board")
-	public String board(int b_type, Model model) {
+	public String board(int b_type, Model model, String currentPage, Board board) {
+		int boardTotal = bs.boardTotal(b_type);
+		
+		Paging pg = new Paging(boardTotal, currentPage);
+		board.setB_type(b_type);
+		board.setStart(pg.getStart());
+		board.setEnd(pg.getEnd());
+		
+		List<Board> boardList = bs.boardList(board);
+		
+		model.addAttribute("boardList", boardList);
+		model.addAttribute("boardTotal", boardTotal);
 		model.addAttribute("b_type", b_type);
 		return "board";
 	}

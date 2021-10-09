@@ -84,8 +84,18 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<c:if test="${b_type == 2 }"><h2><i class="fas fa-users"></i> &nbsp;자유게시판</a></h2></c:if>
 		<table>
 			<tr>
-				
+				<th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
 			</tr>
+			<c:forEach var="board" items="${boardList }"> 
+				<tr>
+					<td style="width: 60%;  font-size: 16px; text-align: initial;">
+						<a style="margin-left: 20px;" href="#">${board.b_title }</a>
+					</td>
+					<td style="width: 20%;">👤${board.b_nickname }</td>
+					<td style="width: 10%;">${board.b_regdate }</td>
+					<td style="width: 10%;">${board.b_count }</td>
+				</tr>
+			</c:forEach>
 		</table>
 		<a href="/bWrite?b_type=${b_type }">글 작성</a>
 	</div>
