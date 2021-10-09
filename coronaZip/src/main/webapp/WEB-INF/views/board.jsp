@@ -38,6 +38,27 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	  padding-top: 10px;
 	}
+		a{
+		text-decoration: none;
+		color:black;
+	}
+	th{ 
+	/* 	border-top: solid 2px #aaaaaa;
+    	background-color: #4d6083;
+    	color:white; */
+    	background-color:#525252;
+    	border-top:solid 2px #aaaaaa;
+    	/* background-color:#eeeeee; */
+    	color: white;
+    	text-align: center;
+	}
+	tr{
+		height:30px; 
+		/* background-color: #e6efff; */
+	}
+	td{
+		border-bottom:solid 1px #dddddd;
+	}
 </style>
 </head>
 <body>
@@ -79,10 +100,21 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </ul>
 	
 	<div>
-		<c:if test="${b_type == 0 }"><h2><i class="fas fa-head-side-virus"></i> &nbsp;코로나 증상</a></h2></c:if>
-		<c:if test="${b_type == 1 }"><h2><i class="fas fa-comment-medical"></i> &nbsp;백신 후기</a></h2></c:if>
-		<c:if test="${b_type == 2 }"><h2><i class="fas fa-users"></i> &nbsp;자유게시판</a></h2></c:if>
-		<table>
+		<div style="margin: 37px 0px; text-align: center;">
+			<c:if test="${b_type == 0 }">
+				<h2 style="font-weight: bold;"><i class="fas fa-head-side-virus"></i> &nbsp;코로나 증상</a></h2>
+				<p style="color: #918f8f;">코로나 증상에 대하여 회원들과 정보를 공유해보세요.</p>
+			</c:if>
+			<c:if test="${b_type == 1 }">
+				<h2 style="font-weight: bold;"><i class="fas fa-comment-medical"></i> &nbsp;백신 후기</a></h2>
+				<p style="color: #918f8f;">백신 접종에 관하여 회원들과 정보를 공유해보세요.</p>
+			</c:if>
+			<c:if test="${b_type == 2 }">
+				<h2 style="font-weight: bold;"><i class="fas fa-users"></i> &nbsp;자유게시판</a></h2>
+				<p style="color: #918f8f;">회원들과 다양한 소통을 해보세요.</p>
+			</c:if>
+		</div>
+		<table style="text-align: center;margin: 0 auto; width: 100%; border-collapse:collapse;">
 			<tr>
 				<th>제목</th><th>작성자</th><th>작성일</th><th>조회수</th>
 			</tr>
