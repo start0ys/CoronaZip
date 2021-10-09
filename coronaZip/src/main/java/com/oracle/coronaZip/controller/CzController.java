@@ -189,6 +189,7 @@ public class CzController {
 		
 		List<Board> boardList = bs.boardList(board);
 		
+		model.addAttribute("pg", pg);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardTotal", boardTotal);
 		model.addAttribute("b_type", b_type);
@@ -202,10 +203,10 @@ public class CzController {
 	}
 	
 	@PostMapping(value = "bWrite")
-	public String write(Board board, Model model) {
+	public String write(Board board, RedirectAttributes redirect) {
 		is.bWrite(board);
-		model.addAttribute("b_type", board.getB_type());
-		return "board";
+		redirect.addAttribute("b_type", board.getB_type());
+		return "redirect:board";
 	}
 	
 }

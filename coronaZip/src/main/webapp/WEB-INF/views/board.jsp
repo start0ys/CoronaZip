@@ -38,23 +38,18 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	  padding-top: 10px;
 	}
-		a{
+	a{
 		text-decoration: none;
 		color:black;
 	}
 	th{ 
-	/* 	border-top: solid 2px #aaaaaa;
-    	background-color: #4d6083;
-    	color:white; */
     	background-color:#525252;
     	border-top:solid 2px #aaaaaa;
-    	/* background-color:#eeeeee; */
     	color: white;
     	text-align: center;
 	}
 	tr{
 		height:30px; 
-		/* background-color: #e6efff; */
 	}
 	td{
 		border-bottom:solid 1px #dddddd;
@@ -74,12 +69,12 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       </c:if>
       <c:if test="${not empty user }">
 	      <span style="color: #717171;">[${user.vaccine }]${user.nickname } 님 반갑습니다.</span>
-	      <span style="margin-right: 25px; margin-left: 7px;"><a href="/logout" style="text-decoration: none;">로그아웃</a></span>
+	      <span style="margin-right: 25px; margin-left: 7px;"><a href="/logout" style="text-decoration: none; color: #337ab7;">로그아웃</a></span>
       </c:if>
     </ul>
     <ul class="nav nav-tabs">
-      <li><a href="/index"><i class='fas fa-home' style='font-size:15px'></i> Home</a></li>
-      <li><a href="/center"><i class='fas fa-map-marker-alt' style='font-size:15px'></i> 예방접종센터</a></li>
+      <li><a href="/index" style="color: #337ab7;"><i class='fas fa-home' style='font-size:15px'></i> Home</a></li>
+      <li><a href="/center" style="color: #337ab7;"><i class='fas fa-map-marker-alt' style='font-size:15px'></i> 예방접종센터</a></li>
       <li class="dropdown active">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class='fas fa-globe' style='font-size:15px'></i> 커뮤니티<span class="caret"></span></a>
         <ul class="dropdown-menu" style="color: #337ab7;">
@@ -90,7 +85,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       </li>
       <c:if test="${not empty user }">
       <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-user-circle"></i> 마이페이지<span class="caret"></span></a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #337ab7;"><i class="fas fa-user-circle"></i> 마이페이지<span class="caret"></span></a>
         <ul class="dropdown-menu" style="color: #337ab7;">
           <li><a href="/update"><i class="fas fa-address-card"></i> &nbsp;정보수정</a></li>
           <li><a href="/msg"><i class="fas fa-envelope"></i> &nbsp;쪽지함</a></li>  
@@ -129,14 +124,34 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 				</tr>
 			</c:forEach>
 		</table>
-		<a href="/bWrite?b_type=${b_type }">글 작성</a>
+		<div style="float: right;">
+			<button class="btn btn-info" onclick="location.href='bWrite?b_type=${b_type }'">✏️글 작성</button>
+		</div>
+	    <div class="w3-center" style="margin-left: 92.15px;">
+			<div class="w3-bar w3-border" style=" margin: 10px 0px;border: 1px solid #7d97a5;">
+				<c:if test="${pg.startPage > pg.pageBlock }">
+					<a href="board?currentPage=${pg.startPage-pg.pageBlock}&b_type=${b_type}" class="w3-bar-item w3-button">&laquo;</a>
+				</c:if>
+				<c:forEach var="i" begin="${pg.startPage }" end="${pg.endPage }">
+					<c:if test="${pg.currentPage == i }">
+						<a href="board?currentPage=${i}&b_type=${b_type}" class="w3-bar-item w3-button" style="background-color: #525252; color: white;">${i}</a>
+					</c:if>
+					<c:if test="${pg.currentPage != i }">
+						<a href="board?currentPage=${i}&b_type=${b_type}" class="w3-bar-item w3-button">${i}</a>
+					</c:if>
+				</c:forEach>
+				<c:if test="${pg.endPage < pg.totalPage }">
+					<a href="board?currentPage=${pg.startPage+pg.pageBlock}&b_type=${b_type}" class="w3-bar-item w3-button">&raquo;</a>
+				</c:if>
+			</div>
+		</div>
 	</div>
 
 	
 	  <div class="footer">
 	    <p>&copy copyright is reserved by 시작</p>
-	    <a href="https://blog.naver.com/rladbtjq18" target="_blank " style="font-size: 17px;"><i class='fab fa-blogger' style='font-size:24px'></i> Blog</a>
-	    <a href="https://github.com/start0ys" target="_blank " style="font-size: 17px; margin-left: 20px;"><i class='fab fa-github-square' style='font-size:24px'></i> Github</a>
+	    <a href="https://blog.naver.com/rladbtjq18" target="_blank " style="font-size: 17px; color: #337ab7;"><i class='fab fa-blogger' style='font-size:24px'></i> Blog</a>
+	    <a href="https://github.com/start0ys" target="_blank " style="font-size: 17px; margin-left: 20px; color: #337ab7;"><i class='fab fa-github-square' style='font-size:24px'></i> Github</a>
 	  </div>
 	
 	</div>
