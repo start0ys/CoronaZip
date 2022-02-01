@@ -71,19 +71,19 @@ public class CzController {
 		String yesterday = dSdf.format(dDate);
 		//확진자 정보가져오기 - 오늘 정보가 업데이트 안되어있으면 어제 정보가져오기
 		List<Infection> cnList = null;
-		Infection cn = null;
+//		Infection cn = null;
 		if(is.cnList(today) == null || is.cn(today) == null) {
 			cnList = is.cnList(yesterday);
-			cn = is.cn(yesterday);
+//			cn = is.cn(yesterday);
 		}else {
 			cnList = is.cnList(today);
-			cn = is.cn(today);
+//			cn = is.cn(today);
 		}
 		//코로나 관련 뉴스 정보 가져오기
 		List<News> news = is.news();
 		
 		model.addAttribute("cnList", cnList);
-		model.addAttribute("cn", cn);
+//		model.addAttribute("cn", cn);
 		model.addAttribute("news", news);
 		
 		return "index";

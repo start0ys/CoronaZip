@@ -43,7 +43,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		color:black;
 	}
 	th{ 
-    	background-color:#525252;
+    	background-color:#6c6b6b;
     	border-top:solid 2px #aaaaaa;
     	color: white;
     	text-align: center;
@@ -125,7 +125,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			</c:forEach>
 		</table>
 		<div style="float: right;">
-			<button class="btn btn-info" onclick="location.href='bWrite?b_type=${b_type }'">✏️글 작성</button>
+			<button class="btn btn-info" onclick="location.href='bWrite?b_type=${b_type }'" style="background-color: #9acad8;">✏️작성</button>
 		</div>
 	    <div class="w3-center" style="margin-left: 92.15px;">
 			<div class="w3-bar w3-border" style=" margin: 10px 0px;border: 1px solid #7d97a5;">
@@ -134,7 +134,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 				</c:if>
 				<c:forEach var="i" begin="${pg.startPage }" end="${pg.endPage }">
 					<c:if test="${pg.currentPage == i }">
-						<a href="board?currentPage=${i}&b_type=${b_type}" class="w3-bar-item w3-button" style="background-color: #525252; color: white;">${i}</a>
+						<a href="board?currentPage=${i}&b_type=${b_type}" class="w3-bar-item w3-button" style="background-color: #6c6b6b; color: white;">${i}</a>
 					</c:if>
 					<c:if test="${pg.currentPage != i }">
 						<a href="board?currentPage=${i}&b_type=${b_type}" class="w3-bar-item w3-button">${i}</a>

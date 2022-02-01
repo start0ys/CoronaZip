@@ -76,14 +76,14 @@ public class InfectionImpl implements InfectionDao {
 				String add = item.getElementsByTagName("incDec").item(0).getChildNodes().item(0).getNodeValue();
 				String local = item.getElementsByTagName("localOccCnt").item(0).getChildNodes().item(0).getNodeValue();
 				String over = item.getElementsByTagName("overFlowCnt").item(0).getChildNodes().item(0).getNodeValue();
-				String recovery = item.getElementsByTagName("isolIngCnt").item(0).getChildNodes().item(0).getNodeValue();
+//				String recovery = item.getElementsByTagName("isolIngCnt").item(0).getChildNodes().item(0).getNodeValue();
 				
 				infection.setCity(city);
 				infection.setTotal(total);
 				infection.setAdd(add);
 				infection.setLocal(local);
 				infection.setOver(over);
-				infection.setRecovery(recovery);
+//				infection.setRecovery(recovery);
 				
 				cnList.add(infection);
 							
@@ -156,7 +156,7 @@ public class InfectionImpl implements InfectionDao {
 	@Override
 	public List<News> news() {
 		List<News> news = new ArrayList<News>();
-		String url = "https://www.google.co.kr/search?q=%EC%BD%94%EB%A1%9C%EB%82%98+%EB%89%B4%EC%8A%A4&sxsrf=ALeKk03ogE3dQlIdSSRA5y2xi2P2QXjG7g%3A1625495107646&source=hp&ei=QxbjYKvVJMraz7sP2dO4kA4&iflsig=AINFCbYAAAAAYOMkUwvYGtNQ00I9gxMZ2MLEQznDfhlc&oq=%EC%BD%94%EB%A1%9C%EB%82%98+%EB%89%B4%EC%8A%A4&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEMQCMgIIADIHCAAQhwIQFDICCAAyAggAMgIIADIECAAQHjIECAAQHjIECAAQHjIECAAQHjoHCCMQ6gIQJzoECCMQJzoICAAQsQMQgwE6BQgAELEDOg0IABCHAhCxAxCDARAUUJ8OWK8cYKweaARwAHgCgAF6iAHKCJIBAzEuOZgBAKABAaoBB2d3cy13aXqwAQo&sclient=gws-wiz&ved=0ahUKEwjrguSTkczxAhVK7XMBHdkpDuIQ4dUDCAc&uact=5";    //크롤링할 url지정
+		String url = "https://www.google.co.kr/search?sxsrf=APq-WBvD_PX_sGWCGlILdD2n1E1NoLZksw:1643705557333&q=%EC%BD%94%EB%A1%9C%EB%82%98+%EB%89%B4%EC%8A%A4&tbm=nws&source=univ&tbo=u&sxsrf=APq-WBvD_PX_sGWCGlILdD2n1E1NoLZksw:1643705557333&sa=X&ved=2ahUKEwj2pfCukN71AhXS3WEKHf0yCYMQt8YBegQIAhAD&biw=976&bih=703&dpr=1.25";    //크롤링할 url지정
         org.jsoup.nodes.Document doc = null;        //Document에는 페이지의 전체 소스가 저장된다
 	    try {
 	    	doc = Jsoup.connect(url).get();
@@ -165,7 +165,7 @@ public class InfectionImpl implements InfectionDao {
 	    }
         //select를 이용하여 원하는 태그를 선택한다. select는 원하는 값을 가져오기 위한 중요한 기능이다.
         //                               ==>원하는 값들이 들어있는 덩어리를 가져온다
-        Elements element = doc.select("div#kp-wp-tab-Latest"); 
+        Elements element = doc.select("g-card.ftSUBd"); 
         //Iterator을 사용하여 하나씩 값 가져오기
         //덩어리안에서 필요한부분만 선택하여 가져올 수 있다.
         Iterator<org.jsoup.nodes.Element> title = element.select("div.mCBkyc.nDgy9d").iterator();

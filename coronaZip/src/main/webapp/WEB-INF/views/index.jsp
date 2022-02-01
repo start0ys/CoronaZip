@@ -90,19 +90,15 @@
           <div class="row">
             <div class="col-xs-offset-3 col-xs-6" style="margin-left: 0; width: 100%;">
               <div class="carousel-inner">
-                <div class="item active">
-                  <div class="carousel-content">
-                      <div>
-                          <h3>기준 날짜 : ${cn.stateDt }</h3>
-                          <div>확진자 수 : ${cn.totCnt }</div>
-                          <div>검사 중 : ${cn.exam }</div>
-                          <div>격리 해제 : ${cn.clear }</div>
-                          <div>사망자 : ${cn.death }</div>
-                      </div>
-                  </div>
-                </div>
               <c:forEach var="cnList" items="${cnList}">
-                    <div class="item">
+                    <c:choose>
+                    	<c:when test="${cnList.city == '합계' }">
+	                    	<div class="item active">
+	                    </c:when>
+	                    <c:otherwise>
+                    		<div class="item">
+                    	</c:otherwise>
+                    </c:choose>
                        <div class="carousel-content">
                            <div>
                                <c:choose>
@@ -117,7 +113,7 @@
 	                           <div>추가 확진자 : ${cnList.add }</div>
 	                           <div>지역발생 : ${cnList.local }</div>
 	                           <div>해외유입 : ${cnList.over }</div>
-	                           <div>치료중 : ${cnList.recovery }</div>
+	                           <%-- <div>치료중 : ${cnList.recovery }</div> --%>
                            </div>
                         </div>
                     </div>
@@ -140,7 +136,7 @@
 		 		<div style="height: 230px; border-top: 1px solid;padding-top: 10px;">${news.content }</div>
 		 	</div>
 		 </a>   
-      </c:forEach>
+      </c:forEach> 
     </div>
     
     <div class="footer">
