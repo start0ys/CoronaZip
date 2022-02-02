@@ -116,7 +116,7 @@ src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 			<c:forEach var="board" items="${boardList }"> 
 				<tr>
 					<td style="width: 60%;  font-size: 16px; text-align: initial;">
-						<a style="margin-left: 20px;" href="#">${board.b_title }</a>
+						<a style="margin-left: 20px;" href="bView?b_idx=${board.b_idx}&b_type=${b_type}&currentPage=${currentPage}">${board.b_title }</a>
 					</td>
 					<td style="width: 20%;">👤${board.b_nickname }</td>
 					<td style="width: 10%;">${board.b_regdate }</td>

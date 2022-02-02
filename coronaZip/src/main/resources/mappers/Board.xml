@@ -18,4 +18,56 @@
 	          )
 	    where rn between #{start} and #{end}
 	</select>
+	<select id="boardView" resultType="Board" parameterType="hashMap">
+		select * from board where b_idx = #{b_idx} and b_type = #{b_type}
+	</select>
+	<update id="bCountUp" parameterType="hashMap">
+		update board set b_count = b_count+1 where b_idx = #{b_idx} and b_type = #{b_type}
+	</update>
+	<select id="cList" resultType="Comment" parameterType="int">
+		select * from comment1 where b_idx = #{b_idx} order by ref asc,re_step
+	</select>
+	<select id="cListTotal" resultType="int" parameterType="int">
+		select count(*) from comment1 where b_idx = #{b_idx}
+	</select>
+	<select id="comment" resultType="Comment" parameterType="int">
+		select * from comment1 where c_idx = #{c_idx}
+	</select>
+	<update id="reUpdate" parameterType="Comment">
+		update comment1 set re_step = re_step + 1 where ref = #{ref} and re_step > #{re_step}
+	</update>
+	<insert id="reInsert" parameterType="Comment">
+		insert into comment1 (
+			c_idx,
+			b_idx,
+			id,
+			c_nickname,
+			c_content,
+			ref,
+			re_step,
+			re_level,
+			c_regdate,
+			c_vaccine
+		)values(
+			(select nvl(max(c_idx),0) + 1 from comment1),
+			#{b_idx},
+			#{id},
+			#{c_nickname},
+			#{c_content},
+			<choose>
+				<when test="c_idx == 0">
+					(select nvl(max(c_idx),0) + 1 from comment1),
+					#{re_step},
+					#{re_level},
+				</when>
+				<otherwise>
+					#{ref},
+					#{re_step} + 1,
+					#{re_level} + 1,
+				</otherwise>
+			</choose>
+			sysdate,
+			#{c_vaccine}
+		)
+	</insert>
 </mapper>

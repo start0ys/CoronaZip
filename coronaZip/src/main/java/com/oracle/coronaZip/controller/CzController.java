@@ -5,6 +5,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,6 +14,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.oracle.coronaZip.model.Board;
+import com.oracle.coronaZip.model.Comment;
 import com.oracle.coronaZip.model.Infection;
 import com.oracle.coronaZip.model.News;
 import com.oracle.coronaZip.model.User;
@@ -28,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -41,6 +44,7 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.json.XML;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -193,6 +197,7 @@ public class CzController {
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardTotal", boardTotal);
 		model.addAttribute("b_type", b_type);
+		model.addAttribute("currentPage", currentPage);
 		return "board";
 	}
 	
@@ -209,4 +214,48 @@ public class CzController {
 		return "redirect:board";
 	}
 	
+	@GetMapping(value = "bView")
+	public String bView(Model model, String b_type, String b_idx, String currentPage,String pC_idx) {
+		Map<String, String> param = new HashedMap<String, String>();
+		param.put("b_type", b_type);
+		param.put("b_idx", b_idx);
+		Board board = bs.boardView(param);
+		int cListTotal = bs.cListTotal(Integer.parseInt(b_idx));
+		List<Comment> cList = bs.cList(Integer.parseInt(b_idx));
+		int c_idx =  StringUtils.isEmpty(pC_idx) ? 0 : Integer.parseInt(pC_idx);
+		int ref = 0, re_level = 0, re_step = 0;
+		if(c_idx > 0) {
+			Comment comment = bs.comment(c_idx);
+			ref = comment.getRef();
+			re_level = comment.getRe_level();
+			re_step = comment.getRe_step();
+		}
+		model.addAttribute("ref", ref);
+		model.addAttribute("re_level", re_level);
+		model.addAttribute("re_step", re_step);
+		model.addAttribute("c_idx", c_idx);
+		
+		model.addAttribute("board", board);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("cListTotal", cListTotal);
+		model.addAttribute("cList", cList);
+		return "bView";
+	}
+	@PostMapping(value = "reWrite")
+	public String reWrite(Model model, String c_nickname, String id, int b_idx, int c_idx,int b_type, int ref, int re_level,int re_step,String c_vaccine,String c_content,RedirectAttributes redirect) {
+		Comment comment = new Comment();
+		comment.setB_idx(b_idx);
+		comment.setId(id);
+		comment.setC_nickname(c_nickname);
+		comment.setC_content(c_content);
+		comment.setC_idx(c_idx);
+		comment.setRef(ref);
+		comment.setRe_step(re_step);
+		comment.setRe_level(re_level);
+		comment.setC_vaccine(c_vaccine);
+		String result = bs.result(comment);
+		redirect.addAttribute("b_type", b_type);
+		redirect.addAttribute("b_idx", b_idx);
+		return "redirect:bView";
+	}
 }
