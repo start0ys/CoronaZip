@@ -70,4 +70,16 @@
 			#{c_vaccine}
 		)
 	</insert>
+	<delete id="reDelete" parameterType="int">
+		delete from comment1 where c_idx = #{c_idx}
+	</delete>
+	<update id="bUpdate" parameterType="Board">
+		update board
+		set b_title = #{b_title},
+		<if test="b_upload != null">
+			b_upload = #{b_upload},
+		</if>
+		b_content = #{b_content}
+		where b_idx = #{b_idx}
+	</update>
 </mapper>

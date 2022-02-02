@@ -16,4 +16,6 @@ public interface BoardDao {
 	Comment        comment(int c_idx);
 	void           reUpdate(Comment comment);
 	void           reInsert(Comment comment);
+	void           reDelete(int c_idx);
+	void           bUpdate(Board board);
 }

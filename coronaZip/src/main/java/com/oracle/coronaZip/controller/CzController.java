@@ -242,7 +242,7 @@ public class CzController {
 		return "bView";
 	}
 	@PostMapping(value = "reWrite")
-	public String reWrite(Model model, String c_nickname, String id, int b_idx, int c_idx,int b_type, int ref, int re_level,int re_step,String c_vaccine,String c_content,RedirectAttributes redirect) {
+	public String reWrite(Model model, String c_nickname, String id, int b_idx, int c_idx,int b_type, int ref, int re_level,int re_step,String c_vaccine,String c_content,RedirectAttributes redirect, String currentPage) {
 		Comment comment = new Comment();
 		comment.setB_idx(b_idx);
 		comment.setId(id);
@@ -256,6 +256,31 @@ public class CzController {
 		String result = bs.result(comment);
 		redirect.addAttribute("b_type", b_type);
 		redirect.addAttribute("b_idx", b_idx);
+		redirect.addAttribute("currentPage", currentPage);
+		return "redirect:bView";
+	}
+	@GetMapping(value = "reDelete")
+	public String reDelete(Model model,int c_idx, int b_idx, int b_type,RedirectAttributes redirect, String currentPage) {
+		String result = bs.reDelete(c_idx);
+		redirect.addAttribute("b_type", b_type);
+		redirect.addAttribute("b_idx", b_idx);
+		redirect.addAttribute("currentPage", currentPage);
+		return "redirect:bView";
+	}
+	@GetMapping(value = "bUpdate")
+	public String bUpdate(Model model, String b_type, String b_idx, String currentPage) {
+		Map<String, String> param = new HashedMap<String, String>();
+		param.put("b_type", b_type);
+		param.put("b_idx", b_idx);
+		Board board = bs.boardView(param);
+		model.addAttribute("board", board);
+		return "bUpdate";
+	}
+	@PostMapping(value = "bUpdate")
+	public String bUpdate2(Board board,RedirectAttributes redirect) {
+		String result = bs.bUpdate(board);
+		redirect.addAttribute("b_type", board.getB_type());
+		redirect.addAttribute("b_idx", board.getB_idx());
 		return "redirect:bView";
 	}
 }

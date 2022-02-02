@@ -14,4 +14,6 @@ public interface BoardService {
 	int            cListTotal(int b_idx);
 	Comment        comment(int c_idx);
 	String		   result(Comment comment);
+	String         reDelete(int c_idx);
+	String         bUpdate(Board board);
 }

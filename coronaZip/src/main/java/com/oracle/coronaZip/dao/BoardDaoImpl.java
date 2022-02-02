@@ -66,4 +66,14 @@ public class BoardDaoImpl implements BoardDao {
 		session.insert("reInsert", comment);
 	}
 
+	@Override
+	public void reDelete(int c_idx) {
+		session.delete("reDelete", c_idx);
+	}
+
+	@Override
+	public void bUpdate(Board board) {
+		session.update("bUpdate", board);
+	}
+
 }

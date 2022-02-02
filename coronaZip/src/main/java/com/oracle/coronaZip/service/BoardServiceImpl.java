@@ -63,4 +63,24 @@ public class BoardServiceImpl implements BoardService{
 		return null;
 	}
 
+	@Override
+	public String reDelete(int c_idx) {
+		try {
+			bd.reDelete(c_idx);
+		} catch (Exception e) {
+			return "댓글 삭제 실패";
+		}
+		return null;
+	}
+
+	@Override
+	public String bUpdate(Board board) {
+		try {
+			bd.bUpdate(board);
+		} catch (Exception e) {
+			return "게시글 수정 실패";
+		}
+		return null;
+	}
+
 }

@@ -84,6 +84,26 @@ function re(id) {
     content.style.display = "block";
 	b=a;
 }
+function del() {
+	const del =  confirm("해당 게시글을 삭제하시겠습니까?");
+	if(del){
+		location.href='bdelete.do?b_idx=${board.b_idx }&pageNum=${pageNum }';
+	}
+}
+function redel(id) {
+	const redel =  confirm("해당 댓글을 삭제하시겠습니까?");
+	var c_idx = id;
+	if(redel){
+		location.href='reDelete?c_idx='+c_idx+'&b_idx=${board.b_idx }&b_type=${board.b_type}&currentPage=${currentPage}';
+	}
+}
+
+function remd(id) {
+	var popupX = (document.body.offsetWidth / 2) - (200 / 2);
+	var popupY= (window.screen.height / 2) - (300 / 2);
+	var c_idx = id;
+	window.open("reUpdate?c_idx="+c_idx,"","width=500,height=300, left="+ popupX + ", top="+ popupY);
+}
 </script>
 </head>
 <body>
@@ -144,6 +164,9 @@ function re(id) {
 		</div>
 		<div style="float: right;">
 			<button class="btn btn-info" onclick="location.href='board?b_type=${board.b_type }&currentPage${currentPage}'" style="background-color: #9acad8;">이전</button>
+			<c:if test="${board.id == user.id }">
+				<button class="btn btn-info" onclick="location.href='bUpdate?b_type=${board.b_type }&b_idx=${board.b_idx }&currentPage${currentPage}'" style="background-color: #9acad8;">수정</button>
+			</c:if>
 		</div>
 		<div style="height: 300px;margin-top: 40px;">${board.b_content }</div>
 		<div style="border-top: 2px solid black;">
@@ -161,12 +184,12 @@ function re(id) {
 					<div style="font-size: 13px; color: gray; margin: 0  0 5px 11px;">${comment.c_regdate }</div>
 				    <div style="margin: 0  0 11px 0; border-bottom: 1px dotted;">
 					    <input style="margin-left: 11px" class="btn1" type="button" value="답글" onclick="re(${comment.c_idx})">
-				<%-- 		<c:if test="${comment.m_num == m_num }">
+						<c:if test="${comment.id == user.id }">
 							<input class="btn1" type="button" value="수정" onclick="remd(${comment.c_idx })">
 						</c:if>
-						<c:if test="${comment.m_num == m_num || m_num == 0}">
+						<c:if test="${comment.id == user.id}">
 							<input class="btn1" type="button" value="삭제" onclick="redel(${comment.c_idx })">
-						</c:if> --%>
+						</c:if>
 				    </div>
 	
 					<div class="hiddenText" id="a${comment.c_idx }">
@@ -180,7 +203,8 @@ function re(id) {
 							<input type="hidden" name="re_level" value="${comment.re_level }">
 							<input type="hidden" name="re_step" value="${comment.re_step }">
 							<input type="hidden" name="c_vaccine" value="${user.vaccine}">
-					       	<span><img src="images/re.gif"></span>
+							<input type="hidden" name="currentPage" value="${currentPage}">
+					       	<span><img src="img/re.gif"></span>
 							<span style="margin: 11px 0 0 0;">👤[${user.vaccine }]${user.nickname }</span>
 							<div style="margin: 11px 0 0 11px;"><textarea name="c_content" id="c_content" maxlength="2000" style="height:100px;" required="required"
 							                 placeholder="댓글을 입력해주세요"></textarea></div>
@@ -200,6 +224,7 @@ function re(id) {
 					<input type="hidden" name="re_level" value="${re_level }">
 					<input type="hidden" name="re_step" value="${re_step }">
 					<input type="hidden" name="c_vaccine" value="${user.vaccine}">
+					<input type="hidden" name="currentPage" value="${currentPage}">
 					<div style="border: 1px dotted black; ">
 						<div style="margin: 11px 0 0 11px;">👤[${user.vaccine }]${user.nickname }</div>
 					    <div style="margin: 20px 0 0 20px;"><textarea name="c_content" id="c_content" maxlength="2000" style="height:100px; border: 0px;" required="required"
