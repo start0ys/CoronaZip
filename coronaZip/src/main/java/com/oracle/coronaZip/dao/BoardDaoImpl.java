@@ -76,4 +76,9 @@ public class BoardDaoImpl implements BoardDao {
 		session.update("bUpdate", board);
 	}
 
+	@Override
+	public void bDelete(int b_idx) {
+		session.delete("bDelete", b_idx);
+	}
+
 }

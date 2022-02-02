@@ -83,4 +83,14 @@ public class BoardServiceImpl implements BoardService{
 		return null;
 	}
 
+	@Override
+	public String bDelete(int b_idx) {
+		try {
+			bd.bDelete(b_idx);
+		} catch (Exception e) {
+			return "게시글 삭제 실패";
+		}
+		return null;
+	}
+
 }

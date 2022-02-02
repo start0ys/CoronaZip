@@ -87,7 +87,7 @@ function re(id) {
 function del() {
 	const del =  confirm("해당 게시글을 삭제하시겠습니까?");
 	if(del){
-		location.href='bdelete.do?b_idx=${board.b_idx }&pageNum=${pageNum }';
+		location.href='bDelete?b_idx=${board.b_idx }&b_type=${board.b_type}&currentPage=${currentPage}';
 	}
 }
 function redel(id) {
@@ -163,10 +163,11 @@ function remd(id) {
 			<span style=" font-size: 15px; color: gray; float: right;">댓글 <b>${cListTotal}</b></span>
 		</div>
 		<div style="float: right;">
-			<button class="btn btn-info" onclick="location.href='board?b_type=${board.b_type }&currentPage${currentPage}'" style="background-color: #9acad8;">이전</button>
 			<c:if test="${board.id == user.id }">
 				<button class="btn btn-info" onclick="location.href='bUpdate?b_type=${board.b_type }&b_idx=${board.b_idx }&currentPage${currentPage}'" style="background-color: #9acad8;">수정</button>
+				<button class="btn btn-info" onclick="del()" style="background-color: #9acad8;">삭제</button>
 			</c:if>
+			<button class="btn btn-info" onclick="location.href='board?b_type=${board.b_type }&currentPage${currentPage}'" style="background-color: #9acad8;">이전</button>
 		</div>
 		<div style="height: 300px;margin-top: 40px;">${board.b_content }</div>
 		<div style="border-top: 2px solid black;">

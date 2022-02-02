@@ -283,4 +283,12 @@ public class CzController {
 		redirect.addAttribute("b_idx", board.getB_idx());
 		return "redirect:bView";
 	}
+	@GetMapping(value = "bDelete")
+	public String bDelete(RedirectAttributes redirect,int b_type,int b_idx,String currentPage) {
+		String result = bs.bDelete(b_idx);
+		redirect.addAttribute("b_type", b_type);
+		redirect.addAttribute("b_idx", b_idx);
+		redirect.addAttribute("currentPage", currentPage);
+		return "redirect:board";
+	}
 }

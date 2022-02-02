@@ -82,4 +82,13 @@
 		b_content = #{b_content}
 		where b_idx = #{b_idx}
 	</update>
+	<delete id="bDelete" parameterType="int">
+	   {call
+	        declare
+	        begin
+	            delete from board    where b_idx = #{b_idx} ;
+	            delete from comment1 where b_idx = #{b_idx} ;
+	        end
+	    }
+	</delete>
 </mapper>
