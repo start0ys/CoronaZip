@@ -119,8 +119,8 @@ public class CzController {
 	@GetMapping(value = "logout")
     public String logout(HttpSession session , HttpServletRequest request) {
         session.invalidate(); 
-        String referer = request.getHeader("Referer");
-        return "redirect:"+ referer;
+//        String referer = request.getHeader("Referer");
+        return "redirect:/index";
     }
 	
 	@GetMapping(value = "join")
@@ -193,11 +193,12 @@ public class CzController {
 		
 		List<Board> boardList = bs.boardList(board);
 		
+		String currentPage2 = StringUtils.isEmpty(currentPage) ? "1" : currentPage;
 		model.addAttribute("pg", pg);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardTotal", boardTotal);
 		model.addAttribute("b_type", b_type);
-		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("currentPage", currentPage2);
 		return "board";
 	}
 	
@@ -290,5 +291,16 @@ public class CzController {
 		redirect.addAttribute("b_idx", b_idx);
 		redirect.addAttribute("currentPage", currentPage);
 		return "redirect:board";
+	}
+	@PostMapping(value = "reUpdate")
+	public String reUpdate(int b_idx, String c_idx, int b_type,String c_content,String currentPage,RedirectAttributes redirect) {
+		Map<String, String> param = new HashedMap<String, String>();
+		param.put("c_idx", c_idx);
+		param.put("c_content", c_content);
+		String result = bs.reUpdate(param);
+		redirect.addAttribute("b_type", b_type);
+		redirect.addAttribute("b_idx", b_idx);
+		redirect.addAttribute("currentPage", currentPage);
+		return "redirect:bView";
 	}
 }

@@ -97,12 +97,36 @@ function redel(id) {
 		location.href='reDelete?c_idx='+c_idx+'&b_idx=${board.b_idx }&b_type=${board.b_type}&currentPage=${currentPage}';
 	}
 }
-
-function remd(id) {
-	var popupX = (document.body.offsetWidth / 2) - (200 / 2);
-	var popupY= (window.screen.height / 2) - (300 / 2);
-	var c_idx = id;
-	window.open("reUpdate?c_idx="+c_idx,"","width=500,height=300, left="+ popupX + ", top="+ popupY);
+var cmt = 0;
+function remd(c_idx) {
+	if(cmt > 0){
+		$('#cmt'+cmt).children().css('display','block');
+		$('#formCmt'+cmt).remove();
+	}
+	const id = 'cmt'+c_idx;
+	const txt = $('#content'+c_idx).text();
+	$('#'+id).children().css('display','none');
+	const str = '<form action="reUpdate" method="post" id="formCmt'+c_idx+'" style="width: 90%; margin: 10px auto;">'+  
+					'<input type="hidden" name="b_idx" value="${board.b_idx }">'+
+					'<input type="hidden" name="c_idx" value="'+c_idx+'">'+
+					'<input type="hidden" name="b_type" value="${board.b_type }">'+
+					'<input type="hidden" name="currentPage" value="${currentPage}">'+
+					'<div style="border: 1px dotted black; ">'+
+						'<div style="margin: 11px 0 0 11px;">👤[${user.vaccine }]${user.nickname }</div>'+
+			    		'<div style="margin: 10px 0 0 20px;"><textarea name="c_content" id="c_content" maxlength="2000" style="height:100px; border: 0px;" required="required">'+txt+'</textarea></div>'+        
+			    		'<div style="margin: 0  0 11px 11px; width: 97px; border: 1px dotted; padding: 5px; border-radius: 10px;">'+
+			    			'<input style="padding: 5px;" class="btn" type="submit" value="수정">'+
+			    			'<input style="padding: 5px; margin-left: 5px;" class="btn" type="button" onclick="cancel()" value="취소">'+
+						'</div>'
+				'</form>';
+	$('#'+id).append(str);
+	cmt = c_idx;
+}
+function cancel(){
+	if(cmt > 0){
+		$('#cmt'+cmt).children().css('display','block');
+		$('#formCmt'+cmt).remove();
+	}
 }
 </script>
 </head>
@@ -167,32 +191,35 @@ function remd(id) {
 				<button class="btn btn-info" onclick="location.href='bUpdate?b_type=${board.b_type }&b_idx=${board.b_idx }&currentPage${currentPage}'" style="background-color: #9acad8;">수정</button>
 				<button class="btn btn-info" onclick="del()" style="background-color: #9acad8;">삭제</button>
 			</c:if>
-			<button class="btn btn-info" onclick="location.href='board?b_type=${board.b_type }&currentPage${currentPage}'" style="background-color: #9acad8;">이전</button>
+			<button class="btn btn-info" onclick="location.href='board?currentPage=${currentPage}&b_type=${board.b_type }'" style="background-color: #9acad8;">이전</button>
 		</div>
-		<div style="height: 300px;margin-top: 40px;">${board.b_content }</div>
-		<div style="border-top: 2px solid black;">
+		<div style="min-height: 300px;margin-top: 40px;">${board.b_content }</div>
+		<div style="border-top: 2px solid black; margin-top: 40px;">
 			<c:forEach var="comment" items="${cList}">
-				<c:if test="${comment.re_level > 0 }">
-					<img src="img/level.gif" width="${comment.re_level*10 }">
-					<img src="img/re.gif">
-					<span style="margin: 11px 0 0 0;">👤[${comment.c_vaccine}]${comment.c_nickname }</span>
-				</c:if> 
-				<c:if test="${comment.re_level == 0 }">
-					<div style="margin: 11px 0 0 11px;">👤[${comment.c_vaccine}]${comment.c_nickname }</div>
-				</c:if>
-				<div style="margin-left: ${comment.re_level*15 }px; ">
-					<div style="margin: 5px 0 0 11px;">${comment.c_content }</div>
-					<div style="font-size: 13px; color: gray; margin: 0  0 5px 11px;">${comment.c_regdate }</div>
-				    <div style="margin: 0  0 11px 0; border-bottom: 1px dotted;">
-					    <input style="margin-left: 11px" class="btn1" type="button" value="답글" onclick="re(${comment.c_idx})">
-						<c:if test="${comment.id == user.id }">
-							<input class="btn1" type="button" value="수정" onclick="remd(${comment.c_idx })">
-						</c:if>
-						<c:if test="${comment.id == user.id}">
-							<input class="btn1" type="button" value="삭제" onclick="redel(${comment.c_idx })">
-						</c:if>
-				    </div>
-	
+				<div id="cmt${comment.c_idx }">
+					<c:if test="${comment.re_level > 0 }">
+						<img src="img/level.gif" width="${comment.re_level*10 }">
+						<img src="img/re.gif">
+						<span style="margin: 11px 0 0 0;">👤[${comment.c_vaccine}]${comment.c_nickname }</span>
+					</c:if> 
+					<c:if test="${comment.re_level == 0 }">
+						<div style="margin: 11px 0 0 11px;">👤[${comment.c_vaccine}]${comment.c_nickname }</div>
+					</c:if>
+					<div style="margin-left: ${comment.re_level*15 }px; ">
+						<div style="margin: 5px 0 0 11px;" id="content${comment.c_idx }">${comment.c_content }</div>
+						<div style="font-size: 13px; color: gray; margin: 0  0 5px 11px;">${comment.c_regdate }</div>
+					    <div style="margin: 0  0 11px 0; border-bottom: 1px dotted;">
+						    <input style="margin-left: 11px" class="btn1" type="button" value="답글" onclick="re(${comment.c_idx})">
+							<c:if test="${comment.id == user.id }">
+								<input class="btn1" type="button" value="수정" onclick="remd(${comment.c_idx })">
+							</c:if>
+							<c:if test="${comment.id == user.id}">
+								<input class="btn1" type="button" value="삭제" onclick="redel(${comment.c_idx })">
+							</c:if>
+					    </div>
+				     </div>
+				 </div>
+			     <div style="margin-left: ${comment.re_level*15 }px; ">
 					<div class="hiddenText" id="a${comment.c_idx }">
 						<form action="reWrite" method="post" name="frm1" id="frm1">
 						    <input type="hidden" name="c_nickname" value="${user.nickname }">

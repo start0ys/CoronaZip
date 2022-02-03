@@ -81,4 +81,9 @@ public class BoardDaoImpl implements BoardDao {
 		session.delete("bDelete", b_idx);
 	}
 
+	@Override
+	public void reUpdate(Map<String, String> param) {
+		session.update("cmtUpdate", param);
+	}
+
 }

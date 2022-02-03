@@ -86,9 +86,14 @@
 	   {call
 	        declare
 	        begin
-	            delete from board    where b_idx = #{b_idx} ;
-	            delete from comment1 where b_idx = #{b_idx} ;
+	            delete from board    where b_idx = #{b_idx};
+	            delete from comment1 where b_idx = #{b_idx};
 	        end
 	    }
 	</delete>
+	<update id="cmtUpdate" parameterType="hashMap">
+		update comment1 
+		set c_content = #{c_content} 
+		where c_idx = #{c_idx}
+	</update>
 </mapper>

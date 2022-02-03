@@ -17,4 +17,5 @@ public interface BoardService {
 	String         reDelete(int c_idx);
 	String         bUpdate(Board board);
 	String         bDelete(int b_idx);
+	String		   reUpdate(Map<String, String> param);
 }

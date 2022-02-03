@@ -93,4 +93,14 @@ public class BoardServiceImpl implements BoardService{
 		return null;
 	}
 
+	@Override
+	public String reUpdate(Map<String, String> param) {
+		try {
+			bd.reUpdate(param);
+		} catch (Exception e) {
+			return "댓글 수정 실패";
+		}
+		return null;
+	}
+
 }
