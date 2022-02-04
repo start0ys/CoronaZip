@@ -307,4 +307,9 @@ public class CzController {
 	public String userUpdate(Model model) {
 		return "userUpdate";
 	}
+	@GetMapping(value = "includeTest")
+	public String userUpdate2(Model model) {
+		model.addAttribute("activeMenu", "home");
+		return "includeTest";
+	}
 }

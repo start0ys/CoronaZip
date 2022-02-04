@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.w3-lobster {
+  font-family: "Lobster", Sans-serif;
+}
+.nav {
+  color:#337ab7;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+}
+.footer{
+  border-top: 1px solid #ddd; 
+  margin: 20px 0; 
+  text-align: center;
+  color:#337ab7;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  padding-top: 10px;
+}
