@@ -89,6 +89,7 @@ public class CzController {
 		model.addAttribute("cnList", cnList);
 //		model.addAttribute("cn", cn);
 		model.addAttribute("news", news);
+		model.addAttribute("activeMenu", "home");
 		
 		return "index";
 	}
