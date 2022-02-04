@@ -303,4 +303,8 @@ public class CzController {
 		redirect.addAttribute("currentPage", currentPage);
 		return "redirect:bView";
 	}
+	@GetMapping(value = "userUpdate")
+	public String userUpdate(Model model) {
+		return "userUpdate";
+	}
 }
