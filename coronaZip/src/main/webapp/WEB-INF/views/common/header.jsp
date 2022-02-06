@@ -15,7 +15,7 @@
 <script type="text/javascript"
 src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="header.css?ver=12">
-<script src="header.js?ver=1"></script>
+<script src="header.js?ver=3"></script>
 <script type="text/javascript">
 	$(document).ready(function(){ 
 		const activeMenuName = '${activeMenu}';

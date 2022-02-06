@@ -95,7 +95,8 @@ public class CzController {
 	}
 	
 	@GetMapping(value = "center")
-	public String center() {
+	public String center(Model model) {
+		model.addAttribute("activeMenu", "center");
 		return "center";
 	}
 	
@@ -125,7 +126,8 @@ public class CzController {
     }
 	
 	@GetMapping(value = "join")
-	public String join() {
+	public String join(Model model) {
+		model.addAttribute("activeMenu", "join");
 		return "join";
 	}
 	
@@ -200,12 +202,14 @@ public class CzController {
 		model.addAttribute("boardTotal", boardTotal);
 		model.addAttribute("b_type", b_type);
 		model.addAttribute("currentPage", currentPage2);
+		model.addAttribute("activeMenu", "board");
 		return "board";
 	}
 	
 	@GetMapping(value = "bWrite")
 	public String write(int b_type, Model model) {
 		model.addAttribute("b_type", b_type);
+		model.addAttribute("activeMenu", "board");
 		return "bWrite";
 	}
 	
@@ -241,6 +245,7 @@ public class CzController {
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("cListTotal", cListTotal);
 		model.addAttribute("cList", cList);
+		model.addAttribute("activeMenu", "board");
 		return "bView";
 	}
 	@PostMapping(value = "reWrite")
@@ -276,6 +281,7 @@ public class CzController {
 		param.put("b_idx", b_idx);
 		Board board = bs.boardView(param);
 		model.addAttribute("board", board);
+		model.addAttribute("activeMenu", "board");
 		return "bUpdate";
 	}
 	@PostMapping(value = "bUpdate")

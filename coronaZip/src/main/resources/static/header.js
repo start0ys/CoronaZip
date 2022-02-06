@@ -10,11 +10,14 @@ function activeMenu(menuName){
 	  case 'center':
 		$('#menuCenter').addClass('active');
 	    break;
-	  case 'border':
-		$('#menuBorder').addClass('active');
+	  case 'board':
+		$('#menuBoard').addClass('active');
 	    break;
 	  case 'myPage':
 		$('#menuMyPage').addClass('active');
+	    break;
+	  case 'join':
+		$('#menuJoin').addClass('active');
 	    break;
 	}
 }

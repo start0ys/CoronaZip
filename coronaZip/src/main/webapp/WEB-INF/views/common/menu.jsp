@@ -10,7 +10,7 @@
   <ul class="nav navbar-nav navbar-right">
       <c:if test="${empty user }">
 	      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-   		  <li><a href="/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+   		  <li id="menuJoin"><a href="/join"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       </c:if>
       <c:if test="${not empty user }">
 	      <span style="color: #717171;">[${user.vaccine }]${user.nickname } 님 반갑습니다.</span>
@@ -20,7 +20,7 @@
     <ul class="nav nav-tabs">
       <li id="menuHome"><a href="/index"><i class='fas fa-home' style='font-size:15px'></i> Home</a></li>
       <li id="menuCenter"><a href="/center"><i class='fas fa-map-marker-alt' style='font-size:15px'></i> 예방접종센터</a></li>
-      <li class="dropdown" id="menuBorder">
+      <li class="dropdown" id="menuBoard">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class='fas fa-globe' style='font-size:15px'></i> 커뮤니티<span class="caret"></span></a>
         <ul class="dropdown-menu" style="color: #337ab7;">
           <li><a href="/board?b_type=0"><i class="fas fa-head-side-virus"></i> &nbsp;코로나 증상</a></li>
