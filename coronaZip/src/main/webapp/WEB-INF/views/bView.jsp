@@ -100,7 +100,7 @@ function cancel(){
 	</div>
 	<div style="float: right;">
 		<c:if test="${board.id == user.id }">
-			<button class="btn btn-info" onclick="location.href='bUpdate?b_type=${board.b_type }&b_idx=${board.b_idx }&currentPage${currentPage}'" style="background-color: #9acad8;">수정</button>
+			<button class="btn btn-info" onclick="location.href='bUpdate?b_type=${board.b_type }&b_idx=${board.b_idx }&currentPage=${currentPage}'" style="background-color: #9acad8;">수정</button>
 			<button class="btn btn-info" onclick="del()" style="background-color: #9acad8;">삭제</button>
 		</c:if>
 		<button class="btn btn-info" onclick="location.href='board?currentPage=${currentPage}&b_type=${board.b_type }'" style="background-color: #9acad8;">이전</button>

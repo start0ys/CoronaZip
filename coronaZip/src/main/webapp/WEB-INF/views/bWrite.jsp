@@ -69,6 +69,7 @@
 	<form action="/bWrite" method="post" id="frm" style="text-align: center; width: 80%; margin: 0 auto;">
 		<input type="hidden" name="id" value="${user.id }">
 		<input type="hidden" name="b_nickname" value="[${user.vaccine }]${user.nickname }">
+		<input type="hidden" name="currentPage" value="${currentPage}">
 		<div>
 			<select name="b_type" style="width: 18%; height: 35px;">
 				<c:if test="${b_type == 0 }"><option value="0" selected="selected">코로나 증상</option></c:if>

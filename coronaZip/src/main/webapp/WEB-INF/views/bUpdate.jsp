@@ -71,6 +71,7 @@
 		<input type="hidden" name="b_nickname" value="[${user.vaccine }]${user.nickname }">
 		<input type="hidden" name="b_idx" value="${board.b_idx}">
 		<input type="hidden" name="b_type" value="${board.b_type}">
+		<input type="hidden" name="currentPage" value="${currentPage}">
 		<div>
 			<select name="b_type" style="width: 18%; height: 35px;">
 				<c:if test="${board.b_type == 0 }"><option value="0" selected="selected">코로나 증상</option></c:if>

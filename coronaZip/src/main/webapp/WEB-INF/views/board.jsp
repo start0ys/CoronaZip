@@ -57,7 +57,7 @@
 	</table>
 	
 	<div style="float: right;">
-		<button class="btn btn-info" onclick="location.href='bWrite?b_type=${b_type }'" style="background-color: #9acad8;">✏️작성</button>
+		<button class="btn btn-info" onclick="location.href='bWrite?b_type=${b_type }&currentPage=${currentPage}'" style="background-color: #9acad8;">✏️작성</button>
 	</div>
 	
 	<div class="w3-center" style="margin-left: 92.15px;">

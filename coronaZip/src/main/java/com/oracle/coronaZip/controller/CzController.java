@@ -207,16 +207,18 @@ public class CzController {
 	}
 	
 	@GetMapping(value = "bWrite")
-	public String write(int b_type, Model model) {
+	public String write(int b_type, Model model,String currentPage) {
 		model.addAttribute("b_type", b_type);
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("activeMenu", "board");
 		return "bWrite";
 	}
 	
 	@PostMapping(value = "bWrite")
-	public String write(Board board, RedirectAttributes redirect) {
+	public String write(Board board, RedirectAttributes redirect,String currentPage) {
 		is.bWrite(board);
 		redirect.addAttribute("b_type", board.getB_type());
+		redirect.addAttribute("currentPage", currentPage);
 		return "redirect:board";
 	}
 	
@@ -281,14 +283,16 @@ public class CzController {
 		param.put("b_idx", b_idx);
 		Board board = bs.boardView(param);
 		model.addAttribute("board", board);
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("activeMenu", "board");
 		return "bUpdate";
 	}
 	@PostMapping(value = "bUpdate")
-	public String bUpdate2(Board board,RedirectAttributes redirect) {
+	public String bUpdate2(Board board,RedirectAttributes redirect, String currentPage) {
 		String result = bs.bUpdate(board);
 		redirect.addAttribute("b_type", board.getB_type());
 		redirect.addAttribute("b_idx", board.getB_idx());
+		redirect.addAttribute("currentPage", currentPage);
 		return "redirect:bView";
 	}
 	@GetMapping(value = "bDelete")
@@ -313,10 +317,5 @@ public class CzController {
 	@GetMapping(value = "userUpdate")
 	public String userUpdate(Model model) {
 		return "userUpdate";
-	}
-	@GetMapping(value = "includeTest")
-	public String userUpdate2(Model model) {
-		model.addAttribute("activeMenu", "home");
-		return "includeTest";
 	}
 }
