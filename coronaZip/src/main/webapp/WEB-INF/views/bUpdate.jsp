@@ -3,6 +3,13 @@
 
 <%@include file="common/header.jsp"%>
 
+<c:if test="${empty user }">
+	<script type="text/javascript">
+		alert("커뮤니티는 로그인 후에 이용할수있습니다.");
+		location.href='index';
+	</script>
+</c:if>
+
 <script type="text/javascript" src="/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <style>
@@ -70,7 +77,6 @@
 		<input type="hidden" name="id" value="${user.id }">
 		<input type="hidden" name="b_nickname" value="[${user.vaccine }]${user.nickname }">
 		<input type="hidden" name="b_idx" value="${board.b_idx}">
-		<input type="hidden" name="b_type" value="${board.b_type}">
 		<input type="hidden" name="currentPage" value="${currentPage}">
 		<div>
 			<select name="b_type" style="width: 18%; height: 35px;">

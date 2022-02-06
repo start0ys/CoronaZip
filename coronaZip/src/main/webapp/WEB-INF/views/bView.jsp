@@ -3,6 +3,14 @@
 
 <%@include file="common/header.jsp"%>
 
+<c:if test="${empty user }">
+	<script type="text/javascript">
+		alert("커뮤니티는 로그인 후에 이용할수있습니다.");
+		location.href='index';
+	</script>
+</c:if>
+
+
 <style>
 	.hiddenText {
    		display: none;
@@ -103,7 +111,7 @@ function cancel(){
 			<button class="btn btn-info" onclick="location.href='bUpdate?b_type=${board.b_type }&b_idx=${board.b_idx }&currentPage=${currentPage}'" style="background-color: #9acad8;">수정</button>
 			<button class="btn btn-info" onclick="del()" style="background-color: #9acad8;">삭제</button>
 		</c:if>
-		<button class="btn btn-info" onclick="location.href='board?currentPage=${currentPage}&b_type=${board.b_type }'" style="background-color: #9acad8;">이전</button>
+		<button class="btn btn-info" onclick="location.href='board?currentPage=${currentPage}&b_type=${board.b_type }'" style="background-color: #9acad8;">목록</button>
 	</div>
 	<div style="min-height: 300px;margin-top: 40px;">${board.b_content }</div>
 	

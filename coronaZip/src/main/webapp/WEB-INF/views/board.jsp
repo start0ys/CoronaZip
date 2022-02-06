@@ -3,6 +3,13 @@
 
 <%@include file="common/header.jsp"%>
 
+<c:if test="${empty user }">
+	<script type="text/javascript">
+		alert("커뮤니티는 로그인 후에 이용할수있습니다.");
+		location.href='index';
+	</script>
+</c:if>
+
 <style>
 	td>a, w3-border>a{
 		text-decoration: none;

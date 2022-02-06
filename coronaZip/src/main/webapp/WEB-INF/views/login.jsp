@@ -12,7 +12,7 @@
 <c:if test="${not empty user }">
 	<script type="text/javascript">
 		alert("로그인 상태에서는 로그인을 이용할수없습니다.");
-		history.go(-1);
+		location.href='index';
 	</script>
 </c:if>
 <style>

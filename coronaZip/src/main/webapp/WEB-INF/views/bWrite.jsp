@@ -3,6 +3,14 @@
 
 <%@include file="common/header.jsp"%>
 
+<c:if test="${empty user }">
+	<script type="text/javascript">
+		alert("커뮤니티는 로그인 후에 이용할수있습니다.");
+		location.href='index';
+	</script>
+</c:if>
+
+
 <script type="text/javascript" src="/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <style>

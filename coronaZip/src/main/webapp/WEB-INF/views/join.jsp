@@ -3,6 +3,13 @@
 
 <%@include file="common/header.jsp"%>
 
+<c:if test="${empty user }">
+	<script type="text/javascript">
+		alert("로그인 상태로는 회원가입을 이용할수없습니다.");
+		location.href='index';
+	</script>
+</c:if>
+
 <style>
 td,th{
   text-align: initial;

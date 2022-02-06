@@ -75,7 +75,9 @@
 	</delete>
 	<update id="bUpdate" parameterType="Board">
 		update board
-		set b_title = #{b_title},
+		set
+		b_type = #{b_type}, 
+		b_title = #{b_title},
 		<if test="b_upload != null">
 			b_upload = #{b_upload},
 		</if>
