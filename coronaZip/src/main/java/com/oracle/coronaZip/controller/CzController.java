@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -34,14 +35,20 @@ import java.util.Map;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 import org.apache.commons.collections4.map.HashedMap;
@@ -215,7 +222,15 @@ public class CzController {
 	}
 	
 	@PostMapping(value = "bWrite")
-	public String write(Board board, RedirectAttributes redirect,String currentPage) {
+	public String write(HttpServletRequest request, MultipartFile file1, Board board, RedirectAttributes redirect,String currentPage)throws Exception {
+		if(file1.isEmpty()) { 
+			board.setB_upload("");
+		}else {			
+			String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
+			String saveName = bs.uploadFile(file1.getOriginalFilename(), file1.getBytes(), uploadPath);
+			board.setB_upload(saveName);
+			
+		}
 		is.bWrite(board);
 		redirect.addAttribute("b_type", board.getB_type());
 		redirect.addAttribute("currentPage", currentPage);
@@ -317,5 +332,41 @@ public class CzController {
 	@GetMapping(value = "userUpdate")
 	public String userUpdate(Model model) {
 		return "userUpdate";
+	}
+	@GetMapping(value = "fileDownLoad")
+	public void fileDownload(HttpServletRequest request, HttpServletResponse response,String fileName) throws ServletException, IOException {
+		try {
+			  request.setCharacterEncoding("utf-8");
+			  String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
+			  
+			  // 다운받을 파일의 전체 경로를 filePath에 저장
+			  String filePath = uploadPath + fileName;
+			  // 다운받을 파일을 불러옴
+			  File file = new File(filePath);
+			  byte b[] = new byte[4096];
+			  // page의 ContentType등을 동적으로 바꾸기 위해 초기화시킴
+			  response.reset();
+			  response.setContentType("application/octet-stream");
+			  // 한글 인코딩
+			  String Encoding = new String(fileName.getBytes("UTF-8"), "8859_1");
+			  // 파일 링크를 클릭했을 때 다운로드 저장 화면이 출력되게 처리하는 부분
+			  response.setHeader("Content-Disposition", "attachment; filename = " + Encoding);
+			  // 파일의 세부 정보를 읽어오기 위해서 선언
+			  FileInputStream in = new FileInputStream(filePath);
+			  // 파일에서 읽어온 세부 정보를 저장하는 파일에 써주기 위해서 선언
+			  ServletOutputStream out2 = response.getOutputStream();
+			  int numRead;
+			  // 바이트 배열 b의 0번 부터 numRead번 까지 파일에 써줌 (출력)
+			  while((numRead = in.read(b, 0, b.length)) != -1){
+			  out2.write(b, 0, numRead);
+			  }  
+			  out2.flush();
+			  out2.close();
+			  in.close();
+ 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} 
+		
 	}
 }

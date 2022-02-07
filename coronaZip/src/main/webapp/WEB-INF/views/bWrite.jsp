@@ -74,7 +74,7 @@
 <div style="margin: 30px 0px 90px 0px;">
 	<h2 style="font-weight: bold; text-align: center;">글 작성</h2>
 	<p style="color: #918f8f; text-align: center; margin-bottom: 20px;">글 내용에 맞는 게시판을 선택하여 글을 작성해주세요.</p>
-	<form action="/bWrite" method="post" id="frm" style="text-align: center; width: 80%; margin: 0 auto;">
+	<form action="/bWrite" method="post" enctype="multipart/form-data" id="frm" style="text-align: center; width: 80%; margin: 0 auto;">
 		<input type="hidden" name="id" value="${user.id }">
 		<input type="hidden" name="b_nickname" value="[${user.vaccine }]${user.nickname }">
 		<input type="hidden" name="currentPage" value="${currentPage}">

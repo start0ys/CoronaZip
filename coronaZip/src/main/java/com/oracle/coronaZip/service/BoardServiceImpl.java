@@ -1,10 +1,13 @@
 package com.oracle.coronaZip.service;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
 
 import com.oracle.coronaZip.dao.BoardDao;
 import com.oracle.coronaZip.model.Board;
@@ -101,6 +104,20 @@ public class BoardServiceImpl implements BoardService{
 			return "댓글 수정 실패";
 		}
 		return null;
+	}
+	
+	@Override
+	public String uploadFile(String orginalName, byte[] fileData, String uploadPath) throws Exception{
+		UUID uid = UUID.randomUUID();
+		// Directory 생성
+		File fileDirectory = new File(uploadPath);
+		if(!fileDirectory.exists()) {
+			fileDirectory.mkdirs();
+		}
+		String savedName = uid.toString() + "_" + orginalName;
+		File target = new File(uploadPath,savedName);
+		FileCopyUtils.copy(fileData, target);
+		return savedName;
 	}
 
 }

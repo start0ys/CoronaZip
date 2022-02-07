@@ -18,4 +18,5 @@ public interface BoardService {
 	String         bUpdate(Board board);
 	String         bDelete(int b_idx);
 	String		   reUpdate(Map<String, String> param);
+	String         uploadFile(String orginalName, byte[] fileData, String uploadPath) throws Exception;
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <%@include file="common/header.jsp"%>
 
 <c:if test="${empty user }">
@@ -113,7 +113,14 @@ function cancel(){
 		</c:if>
 		<button class="btn btn-info" onclick="location.href='board?currentPage=${currentPage}&b_type=${board.b_type }'" style="background-color: #9acad8;">목록</button>
 	</div>
-	<div style="min-height: 300px;margin-top: 40px;">${board.b_content }</div>
+	<div style="min-height: 300px;margin-top: 40px;">
+		<c:if test="${not empty board.b_upload }">
+			<div style="text-align: center;">
+				<a href="fileDownLoad?fileName=${board.b_upload}" style="text-decoration: none; color: black;">📁${fn:substringAfter(board.b_upload, '_') }</a>
+			</div>
+		</c:if>
+		${board.b_content }
+	</div>
 	
 	<div style="border-top: 2px solid black; margin-top: 40px;">
 		<c:forEach var="comment" items="${cList}">
