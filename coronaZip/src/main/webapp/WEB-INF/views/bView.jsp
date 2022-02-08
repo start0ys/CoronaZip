@@ -106,6 +106,11 @@ function cancel(){
 		<span style=" font-size: 13px; color: gray;">조회수 : ${board.b_count }</span>
 		<span style=" font-size: 15px; color: gray; float: right;">댓글 <b>${cListTotal}</b></span>
 	</div>
+	<c:if test="${not empty board.b_upload }">
+		<div style="float: left;">
+			첨부파일 : <a href="fileDownLoad?fileName=${board.b_upload}" style="text-decoration: none; color: black;">📁${fn:substringAfter(board.b_upload, '_') }</a>
+		</div>
+	</c:if>
 	<div style="float: right;">
 		<c:if test="${board.id == user.id }">
 			<button class="btn btn-info" onclick="location.href='bUpdate?b_type=${board.b_type }&b_idx=${board.b_idx }&currentPage=${currentPage}'" style="background-color: #9acad8;">수정</button>
@@ -113,14 +118,7 @@ function cancel(){
 		</c:if>
 		<button class="btn btn-info" onclick="location.href='board?currentPage=${currentPage}&b_type=${board.b_type }'" style="background-color: #9acad8;">목록</button>
 	</div>
-	<div style="min-height: 300px;margin-top: 40px;">
-		<c:if test="${not empty board.b_upload }">
-			<div style="text-align: center;">
-				<a href="fileDownLoad?fileName=${board.b_upload}" style="text-decoration: none; color: black;">📁${fn:substringAfter(board.b_upload, '_') }</a>
-			</div>
-		</c:if>
-		${board.b_content }
-	</div>
+	<div style="min-height: 300px;margin-top: 40px;">${board.b_content }</div>
 	
 	<div style="border-top: 2px solid black; margin-top: 40px;">
 		<c:forEach var="comment" items="${cList}">

@@ -369,4 +369,18 @@ public class CzController {
 		} 
 		
 	}
+	@GetMapping(value = "fileDelete")
+	public void uploadFileDelete(HttpServletRequest request, Model model,String fileName) throws Exception{
+	   try {
+		   	String uploadPath = request.getSession().getServletContext().getRealPath("/upload/");
+		  	String deleteFile = uploadPath + fileName;
+		  	File file = new File(deleteFile); 
+			if( file.exists() ){ 
+				file.delete();
+			}
+		
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }

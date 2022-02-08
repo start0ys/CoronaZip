@@ -26,6 +26,6 @@
 		update member set pw = #{pw} where id = #{id} 
 	</update>
 	<insert id="bWrite" parameterType="Board">
-		insert into board values (board_seq.nextval,#{id},#{b_type},#{b_title},#{b_nickname},sysdate,#{b_content},0,'','')
+		insert into board values (board_seq.nextval,#{id},#{b_type},#{b_title},#{b_nickname},sysdate,#{b_content},0,#{b_upload},'')
 	</insert>
 </mapper>

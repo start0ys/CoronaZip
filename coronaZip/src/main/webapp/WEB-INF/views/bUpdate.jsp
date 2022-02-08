@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <%@include file="common/header.jsp"%>
 
 <c:if test="${empty user }">
@@ -77,6 +77,7 @@
 		<input type="hidden" name="id" value="${user.id }">
 		<input type="hidden" name="b_nickname" value="[${user.vaccine }]${user.nickname }">
 		<input type="hidden" name="b_idx" value="${board.b_idx}">
+		<input type="hidden" name="b_upload" id="b_upload" value="${board.b_upload }">
 		<input type="hidden" name="currentPage" value="${currentPage}">
 		<div>
 			<select name="b_type" style="width: 18%; height: 35px;">
@@ -91,7 +92,7 @@
 		</div>
 		<div style="float: right; margin: 5px 0px;">
 			<div class="fileBox">
-				<input type="text" class="fileName" readonly="readonly" value="${board.b_upload }">
+				<input type="text" class="fileName" readonly="readonly" value="${fn:substringAfter(board.b_upload, '_') }">
 				<label for="uploadBtn" class="btn_file">파일 업로드</label>
 				<input type="file" id="uploadBtn" class="uploadBtn" name="file1">
 				<label class="fbtn" onclick="fdel()">제거</label>
@@ -122,26 +123,17 @@
 	 }
 	 obj[val] = $(this);
 	});	
-	
-	var uploadFile = $('.fileBox .uploadBtn');
-	uploadFile.on('change', function(){
-		if(window.FileReader){
-			var filename = $(this)[0].files[0].name;
-		} else {
-			var filename = $(this).val().split('/').pop().split('\\').pop();
-		}
-		$(this).siblings('.fileName').val(filename);
-	});
-	
+		
 	function fdel(){
 	    $('.fileName').val('');
+	    $('#b_upload').val('');
 		var agent = navigator.userAgent.toLowerCase();
 		//파일초기화
 		if ( (navigator.appName == 'Netscape' && navigator.userAgent.search('Trident') != -1) || (agent.indexOf("msie") != -1) ) {
 			$("#uploadBtn").replaceWith($("#uploadBtn").clone(true));
 		}else{
 		    $("#uploadBtn").val("");
-		}	
+		}
 	}
 	
 	var oEditors = [];
@@ -160,9 +152,24 @@
 	var frm = document.getElementById("frm");
 	function save(){
 		oEditors.getById["b_content"].exec("UPDATE_CONTENTS_FIELD", []);  //스마트 에디터 값을 텍스트컨텐츠로 전달
+		if($('.fileName').val() == ''){
+			$.get('fileDelete?fileName=${board.b_upload }');
+		}
 		frm.submit(); // submit
 		return; 
 	}
+	
+	var uploadFile = $('.fileBox .uploadBtn');
+	uploadFile.on('change', function(){
+		if(window.FileReader){
+			var filename = $(this)[0].files[0].name;
+		} else {
+			var filename = $(this).val().split('/').pop().split('\\').pop();
+		}
+		$(this).siblings('.fileName').val(filename);
+		$('#b_upload').val('change');
+		$.get('fileDelete?fileName=${board.b_upload }');
+	});
 </script>
 
 </body>
