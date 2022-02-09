@@ -78,9 +78,7 @@
 		set
 		b_type = #{b_type}, 
 		b_title = #{b_title},
-		<if test="b_upload != null">
-			b_upload = #{b_upload},
-		</if>
+		b_upload = #{b_upload},
 		b_content = #{b_content}
 		where b_idx = #{b_idx}
 	</update>

@@ -43,6 +43,9 @@ function re(id) {
 function del() {
 	const del =  confirm("해당 게시글을 삭제하시겠습니까?");
 	if(del){
+		const fileName = '${board.b_upload }';
+		if(!!fileName || fileName != '')
+			$.get('fileDelete?fileName='+fileName);
 		location.href='bDelete?b_idx=${board.b_idx }&b_type=${board.b_type}&currentPage=${currentPage}';
 	}
 }
@@ -107,7 +110,7 @@ function cancel(){
 		<span style=" font-size: 15px; color: gray; float: right;">댓글 <b>${cListTotal}</b></span>
 	</div>
 	<c:if test="${not empty board.b_upload }">
-		<div style="float: left;">
+		<div style="float: left; margin: 5px 0 0 5px;">
 			첨부파일 : <a href="fileDownLoad?fileName=${board.b_upload}" style="text-decoration: none; color: black;">📁${fn:substringAfter(board.b_upload, '_') }</a>
 		</div>
 	</c:if>
