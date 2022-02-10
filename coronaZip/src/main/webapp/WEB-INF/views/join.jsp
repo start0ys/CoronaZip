@@ -3,7 +3,7 @@
 
 <%@include file="common/header.jsp"%>
 
-<c:if test="${empty user }">
+<c:if test="${not empty user }">
 	<script type="text/javascript">
 		alert("로그인 상태로는 회원가입을 이용할수없습니다.");
 		location.href='index';
@@ -84,9 +84,9 @@ td{
 			<tr>
 			 	<th>주소</th>
 			  	<td style="padding: 7px 0px;">
-					<input type="text" id="postcode" name="postcode" readonly="readonly" placeholder="우편번호" style="margin-left: 7px; width: 90px;">
+					<input type="text" id="postcode" name="postcode" readonly="readonly" placeholder="우편번호" style="margin-left: 7px; width: 90px; background-color: #fbfafa; border: 1px solid;">
 					<input type="button" value="🔍️주소검색" onclick="findAddr()"><br>
-					<input type="text" id="bs_addr" name="bs_addr" readonly="readonly" placeholder="주소" style="margin-left: 7px; width: 400px; margin-top: 4px; margin-bottom: 4px;"><br>
+					<input type="text" id="bs_addr" name="bs_addr" readonly="readonly" placeholder="주소" style="margin-left: 7px; width: 400px; margin-top: 4px; margin-bottom: 4px;background-color: #fbfafa; border: 1px solid;"><br>
 					<input type="text" id="dt_addr" name="dt_addr" placeholder="상세주소" required="required" style="margin-left: 7px; width: 400px;">
 			  	</td>
 			</tr>

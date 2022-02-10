@@ -12,6 +12,7 @@ import org.springframework.util.FileCopyUtils;
 import com.oracle.coronaZip.dao.BoardDao;
 import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Comment;
+import com.oracle.coronaZip.model.User;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -118,6 +119,11 @@ public class BoardServiceImpl implements BoardService{
 		File target = new File(uploadPath,savedName);
 		FileCopyUtils.copy(fileData, target);
 		return savedName;
+	}
+
+	@Override
+	public User getUser(String id) {
+		return bd.getUser(id);
 	}
 
 }

@@ -96,4 +96,7 @@
 		set c_content = #{c_content} 
 		where c_idx = #{c_idx}
 	</update>
+	<select id="getUser" resultType="User" parameterType="java.lang.String">
+		select * from member where id = #{id}
+	</select>
 </mapper>

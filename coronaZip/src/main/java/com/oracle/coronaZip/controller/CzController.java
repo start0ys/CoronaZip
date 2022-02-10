@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -140,7 +141,7 @@ public class CzController {
 	
 	@PostMapping(value = "join")
 	public String join2(User user) {
-		user.setAddress(user.getBs_addr() + " " + user.getDt_addr());
+		user.setAddress(user.getBs_addr() + "|//|" + user.getDt_addr());
 		is.join(user);
 		return "redirect:/index";
 	}
@@ -376,7 +377,13 @@ public class CzController {
 		}
 	}
 	@GetMapping(value = "userUpdate")
-	public String userUpdate(Model model) {
+	public String userUpdate(Model model,String id) {
+		User user = bs.getUser(id);
+		StringTokenizer st = new StringTokenizer(user.getAddress(),"|//|");
+		user.setBs_addr(st.nextToken());
+		user.setDt_addr(st.nextToken());
+		model.addAttribute("user", user);
+		model.addAttribute("activeMenu", "myPage");
 		return "userUpdate";
 	}
 }

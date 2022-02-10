@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Comment;
+import com.oracle.coronaZip.model.User;
 import com.oracle.coronaZip.service.Paging;
 
 import oracle.net.aso.b;
@@ -84,6 +85,11 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void reUpdate(Map<String, String> param) {
 		session.update("cmtUpdate", param);
+	}
+
+	@Override
+	public User getUser(String id) {
+		return session.selectOne("getUser", id);
 	}
 
 }

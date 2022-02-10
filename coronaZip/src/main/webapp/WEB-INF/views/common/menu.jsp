@@ -32,7 +32,7 @@
       <li class="dropdown" id="menuMyPage">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fas fa-user-circle"></i> 마이페이지<span class="caret"></span></a>
         <ul class="dropdown-menu" style="color: #337ab7;">
-          <li><a href="/update"><i class="fas fa-address-card"></i> &nbsp;정보수정</a></li>
+          <li><a href="userUpdate?id=${user.id }"><i class="fas fa-address-card"></i> &nbsp;정보수정</a></li>
           <li><a href="/msg"><i class="fas fa-envelope"></i> &nbsp;쪽지함</a></li>  
         </ul>
       </li>

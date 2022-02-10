@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Comment;
+import com.oracle.coronaZip.model.User;
 
 public interface BoardDao {
 	int            boardTotal(int b_type);
@@ -20,4 +21,5 @@ public interface BoardDao {
 	void           bUpdate(Board board);
 	void           bDelete(int b_idx);
 	void		   reUpdate(Map<String, String> param);
+	User		   getUser(String id);
 }

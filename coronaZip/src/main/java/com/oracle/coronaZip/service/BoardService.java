@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Comment;
+import com.oracle.coronaZip.model.User;
 
 public interface BoardService {
 	int            boardTotal(int b_type);
@@ -19,4 +20,5 @@ public interface BoardService {
 	String         bDelete(int b_idx);
 	String		   reUpdate(Map<String, String> param);
 	String         uploadFile(String orginalName, byte[] fileData, String uploadPath) throws Exception;
+	User		   getUser(String id);
 }
