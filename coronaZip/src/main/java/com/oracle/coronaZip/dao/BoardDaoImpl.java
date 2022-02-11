@@ -92,4 +92,9 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectOne("getUser", id);
 	}
 
+	@Override
+	public void userUpdate(User user) {
+		session.update("userUpdate", user);
+	}
+
 }

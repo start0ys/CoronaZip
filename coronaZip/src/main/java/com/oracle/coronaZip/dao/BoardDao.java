@@ -22,4 +22,5 @@ public interface BoardDao {
 	void           bDelete(int b_idx);
 	void		   reUpdate(Map<String, String> param);
 	User		   getUser(String id);
+	void		   userUpdate(User user);
 }

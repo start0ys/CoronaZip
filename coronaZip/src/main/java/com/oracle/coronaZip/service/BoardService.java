@@ -21,4 +21,5 @@ public interface BoardService {
 	String		   reUpdate(Map<String, String> param);
 	String         uploadFile(String orginalName, byte[] fileData, String uploadPath) throws Exception;
 	User		   getUser(String id);
+	String         userUpdate(User user);
 }

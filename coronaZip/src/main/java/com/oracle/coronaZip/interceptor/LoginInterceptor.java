@@ -16,7 +16,7 @@ import com.oracle.coronaZip.model.User;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 	
-	public List interceptorPh = Arrays.asList("/index/**", "/center/**",  "/join/**", "/login/**", "/board/**", "/bWrite/**", "/bView/**");
+	public List interceptorPh = Arrays.asList("/index/**", "/center/**",  "/join/**", "/login/**", "/board/**", "/bWrite/**", "/bView/**", "/bUpdate/**");
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)throws Exception{

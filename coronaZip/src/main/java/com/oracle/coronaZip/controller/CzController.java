@@ -386,4 +386,11 @@ public class CzController {
 		model.addAttribute("activeMenu", "myPage");
 		return "userUpdate";
 	}
+	@PostMapping(value = "userUpdate")
+	public String updateUser(User user, RedirectAttributes redirect) {
+		user.setAddress(user.getBs_addr() + "|//|" + user.getDt_addr());
+		String result = bs.userUpdate(user);
+		redirect.addAttribute("id", user.getId());
+		return "redirect:userUpdate";
+	}
 }

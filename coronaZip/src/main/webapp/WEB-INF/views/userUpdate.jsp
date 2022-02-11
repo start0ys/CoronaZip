@@ -5,7 +5,7 @@
 
 <c:if test="${empty user }">
 	<script type="text/javascript">
-		alert("로그인 상태로는 회원가입을 이용할수없습니다.");
+		alert("정보수정은 로그인 후에 이용할수있습니다.");
 		location.href='index';
 	</script>
 </c:if>
@@ -42,20 +42,21 @@ td{
 <%@include file="common/menu.jsp"%>
 
 <div style="text-align: center; margin-top: 30px; margin-bottom: 60px;">
-	<form action="updateUser" method="post" name="frm" onsubmit="return subChk()">
+	<form action="userUpdate" method="post" name="frm" onsubmit="return subChk()">
+		<input type="hidden" name="id" value="${user.id }">
 		<div style="margin: 37px 0px;">
 			<h2 style="font-weight: bold;">정보수정</h2>
-			<p style="color: #918f8f;">변경된 개인정보를 수정할수있습니다.</p>
+			<p style="color: #918f8f;">사용자의 개인정보를 수정할수있습니다.</p>
 		</div>  
 		<table style="border: none; margin: 0 auto; width: 80%;" border="1">
 			<tr><th>이름</th><td>${user.name }</td></tr>
 			<tr><th>생년월일</th><td>${user.birth }</td></tr>
 			<tr><th>성별</th><td>${user.sex }</td></tr>
-			<tr><th>비밀번호 변경</th><td><input type="password" id="pw" name="pw" required="required"></td></tr>
+			<tr><th>비밀번호 변경</th><td><input type="password" id="pw" name="pw"></td></tr>
 			<tr>
 				<th>비밀번호 변경 확인</th>
 				<td>
-				 	<input type="password" id="pw2" name="pw2" required="required" onkeyup="pwChk()">
+				 	<input type="password" id="pw2" name="pw2" onkeyup="pwChk()">
 				 	<span id="pwAlert"></span>
 				</td>
 			</tr>

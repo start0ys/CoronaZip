@@ -126,4 +126,14 @@ public class BoardServiceImpl implements BoardService{
 		return bd.getUser(id);
 	}
 
+	@Override
+	public String userUpdate(User user) {
+		try {
+			bd.userUpdate(user);
+		} catch (Exception e) {
+			return "정보 수정 실패";
+		}
+		return null;
+	}
+
 }
