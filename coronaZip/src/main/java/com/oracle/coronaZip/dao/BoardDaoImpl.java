@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Comment;
+import com.oracle.coronaZip.model.Menu;
 import com.oracle.coronaZip.model.User;
 import com.oracle.coronaZip.service.Paging;
 
@@ -95,6 +96,11 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void userUpdate(User user) {
 		session.update("userUpdate", user);
+	}
+
+	@Override
+	public List<Menu> menuList() {
+		return session.selectList("getMenu");
 	}
 
 }

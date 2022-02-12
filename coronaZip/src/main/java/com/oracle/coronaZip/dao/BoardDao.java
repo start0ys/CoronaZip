@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Comment;
+import com.oracle.coronaZip.model.Menu;
 import com.oracle.coronaZip.model.User;
 
 public interface BoardDao {
@@ -23,4 +24,5 @@ public interface BoardDao {
 	void		   reUpdate(Map<String, String> param);
 	User		   getUser(String id);
 	void		   userUpdate(User user);
+	List<Menu>	   menuList();
 }

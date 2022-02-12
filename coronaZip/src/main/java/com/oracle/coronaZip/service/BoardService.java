@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Comment;
+import com.oracle.coronaZip.model.Menu;
 import com.oracle.coronaZip.model.User;
 
 public interface BoardService {
@@ -22,4 +23,5 @@ public interface BoardService {
 	String         uploadFile(String orginalName, byte[] fileData, String uploadPath) throws Exception;
 	User		   getUser(String id);
 	String         userUpdate(User user);
+	List<Menu>	   menuList();
 }

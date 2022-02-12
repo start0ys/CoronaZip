@@ -12,6 +12,7 @@ import org.springframework.util.FileCopyUtils;
 import com.oracle.coronaZip.dao.BoardDao;
 import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Comment;
+import com.oracle.coronaZip.model.Menu;
 import com.oracle.coronaZip.model.User;
 
 @Service
@@ -134,6 +135,11 @@ public class BoardServiceImpl implements BoardService{
 			return "정보 수정 실패";
 		}
 		return null;
+	}
+
+	@Override
+	public List<Menu> menuList() {
+		return bd.menuList();
 	}
 
 }

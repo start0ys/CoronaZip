@@ -4,5 +4,6 @@
 		<typeAlias type="com.oracle.coronaZip.model.User"       alias="User"/>
 		<typeAlias type="com.oracle.coronaZip.model.Board"      alias="Board"/>
 		<typeAlias type="com.oracle.coronaZip.model.Comment"    alias="Comment"/>
+		<typeAlias type="com.oracle.coronaZip.model.Menu"       alias="Menu"/>
 	</typeAliases>
 </configuration>

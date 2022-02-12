@@ -112,4 +112,7 @@
 		vaccine = #{vaccine}
 		where id = #{id}
 	</update>
+	<select id="getMenu" resultType="Menu">
+		select * from menulist order by idx,groupNum
+	</select>
 </mapper>

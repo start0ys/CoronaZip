@@ -17,6 +17,7 @@ import org.w3c.dom.Element;
 import com.oracle.coronaZip.model.Board;
 import com.oracle.coronaZip.model.Comment;
 import com.oracle.coronaZip.model.Infection;
+import com.oracle.coronaZip.model.Menu;
 import com.oracle.coronaZip.model.News;
 import com.oracle.coronaZip.model.User;
 import com.oracle.coronaZip.service.BoardService;
@@ -93,10 +94,11 @@ public class CzController {
 		}
 		//코로나 관련 뉴스 정보 가져오기
 		List<News> news = is.news();
-		
+		List<Menu> menuList = bs.menuList();
 		model.addAttribute("cnList", cnList);
 //		model.addAttribute("cn", cn);
 		model.addAttribute("news", news);
+		model.addAttribute("menuList", menuList);
 		model.addAttribute("activeMenu", "home");
 		
 		return "index";
