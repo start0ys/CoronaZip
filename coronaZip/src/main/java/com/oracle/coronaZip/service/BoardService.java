@@ -24,4 +24,5 @@ public interface BoardService {
 	User		   getUser(String id);
 	String         userUpdate(User user);
 	List<Menu>	   menuList();
+	Menu		   menuSelect(String idx);
 }

@@ -142,4 +142,9 @@ public class BoardServiceImpl implements BoardService{
 		return bd.menuList();
 	}
 
+	@Override
+	public Menu menuSelect(String idx) {
+		return bd.menuSelect(idx);
+	}
+
 }

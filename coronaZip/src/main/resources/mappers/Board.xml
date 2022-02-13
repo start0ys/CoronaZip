@@ -115,4 +115,7 @@
 	<select id="getMenu" resultType="Menu">
 		select * from menulist order by idx,groupNum
 	</select>
+	<select id="menuSelect" parameterType="java.lang.String" resultType="Menu">
+		select * from menulist where idx = #{idx}
+	</select>
 </mapper>

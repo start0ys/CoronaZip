@@ -16,6 +16,9 @@ function activeMenu(menuName){
 	  case 'myPage':
 		$('#menuMyPage').addClass('active');
 	    break;
+	  case 'setMenu':
+		$('#setMenu').addClass('active');
+	    break;
 	  case 'join':
 		$('#menuJoin').addClass('active');
 	    break;

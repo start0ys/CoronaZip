@@ -95,6 +95,7 @@ public class CzController {
 		//코로나 관련 뉴스 정보 가져오기
 		List<News> news = is.news();
 		List<Menu> menuList = bs.menuList();
+		
 		model.addAttribute("cnList", cnList);
 //		model.addAttribute("cn", cn);
 		model.addAttribute("news", news);
@@ -106,6 +107,8 @@ public class CzController {
 	
 	@GetMapping(value = "center")
 	public String center(Model model) {
+		List<Menu> menuList = bs.menuList();
+		model.addAttribute("menuList", menuList);
 		model.addAttribute("activeMenu", "center");
 		return "center";
 	}
@@ -137,6 +140,8 @@ public class CzController {
 	
 	@GetMapping(value = "join")
 	public String join(Model model) {
+		List<Menu> menuList = bs.menuList();
+		model.addAttribute("menuList", menuList);
 		model.addAttribute("activeMenu", "join");
 		return "join";
 	}
@@ -207,6 +212,9 @@ public class CzController {
 		List<Board> boardList = bs.boardList(board);
 		
 		String currentPage2 = StringUtils.isEmpty(currentPage) ? "1" : currentPage;
+		
+		List<Menu> menuList = bs.menuList();
+		model.addAttribute("menuList", menuList);
 		model.addAttribute("pg", pg);
 		model.addAttribute("boardList", boardList);
 		model.addAttribute("boardTotal", boardTotal);
@@ -218,6 +226,8 @@ public class CzController {
 	
 	@GetMapping(value = "bWrite")
 	public String write(int b_type, Model model,String currentPage) {
+		List<Menu> menuList = bs.menuList();
+		model.addAttribute("menuList", menuList);
 		model.addAttribute("b_type", b_type);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("activeMenu", "board");
@@ -256,6 +266,8 @@ public class CzController {
 			re_level = comment.getRe_level();
 			re_step = comment.getRe_step();
 		}
+		List<Menu> menuList = bs.menuList();
+		model.addAttribute("menuList", menuList);
 		model.addAttribute("ref", ref);
 		model.addAttribute("re_level", re_level);
 		model.addAttribute("re_step", re_step);
@@ -300,6 +312,8 @@ public class CzController {
 		param.put("b_type", b_type);
 		param.put("b_idx", b_idx);
 		Board board = bs.boardView(param);
+		List<Menu> menuList = bs.menuList();
+		model.addAttribute("menuList", menuList);
 		model.addAttribute("board", board);
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("activeMenu", "board");
@@ -379,11 +393,14 @@ public class CzController {
 		}
 	}
 	@GetMapping(value = "userUpdate")
-	public String userUpdate(Model model,String id) {
-		User user = bs.getUser(id);
+	public String userUpdate(HttpSession session, Model model) {
+		User user2 = (User) session.getAttribute("user");
+		User user = bs.getUser(user2.getId());
 		StringTokenizer st = new StringTokenizer(user.getAddress(),"|//|");
 		user.setBs_addr(st.nextToken());
 		user.setDt_addr(st.nextToken());
+		List<Menu> menuList = bs.menuList();
+		model.addAttribute("menuList", menuList);
 		model.addAttribute("user", user);
 		model.addAttribute("activeMenu", "myPage");
 		return "userUpdate";
@@ -394,5 +411,17 @@ public class CzController {
 		String result = bs.userUpdate(user);
 		redirect.addAttribute("id", user.getId());
 		return "redirect:userUpdate";
+	}
+	@GetMapping(value = "setMenu")
+	public String setMenu(Model model) {
+		List<Menu> menuList = bs.menuList();
+		model.addAttribute("menuList", menuList);
+		model.addAttribute("activeMenu", "setMenu");
+		return "setMenu";
+	}
+	@ResponseBody
+	@GetMapping(value = "menuSelect")
+	public Menu menuSelect(String idx){
+		return bs.menuSelect(idx);
 	}
 }

@@ -103,4 +103,9 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectList("getMenu");
 	}
 
+	@Override
+	public Menu menuSelect(String idx) {
+		return session.selectOne("menuSelect", idx);
+	}
+
 }

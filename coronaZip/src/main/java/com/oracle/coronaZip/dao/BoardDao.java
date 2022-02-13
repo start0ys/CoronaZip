@@ -25,4 +25,5 @@ public interface BoardDao {
 	User		   getUser(String id);
 	void		   userUpdate(User user);
 	List<Menu>	   menuList();
+	Menu		   menuSelect(String idx);
 }
