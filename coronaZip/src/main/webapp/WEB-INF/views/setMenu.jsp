@@ -4,10 +4,21 @@
 
 <%@include file="common/header.jsp"%>
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"/>
+<link rel="stylesheet" href="dist/css/bootstrap-iconpicker.min.css"/>
+
 <style>
 .menuData:hover{color: #337ab7; cursor:pointer;}
+a{color: #337AB3;}
+.dropdown-toggle::after {
+    display: none;
+}
 </style>
 <script type="text/javascript">
+$(document).ready(function(){
+	$('button[role="iconpicker"]').find('input').attr('name','icon');
+});
 function changeMenu(idx){
 	$('#menuDetail').css({'display':'block'});
 	$('#addMenuSetting').css({'display':'none'});
@@ -18,12 +29,15 @@ function changeMenu(idx){
 			if($('#menuTop').length > 0) $('#menuTop').remove();
 			$('#name').val(data.name);
 			$("input[name='type'][value='"+data.type+"']").prop("checked", true);
-			if(!!data.icon && data.icon.length > 0){
-				if($('#iconY').length > 0) $('#iconY').remove();
-				$('#icon').append('<i class="'+data.icon+'" id="iconY"></i>');
-			}
+			let icon = '';
+			if(!!data.icon && data.icon.length > 0) icon = data.icon;
+			else icon = 'empty';
+			$('button[role="iconpicker"]').find('i').attr('class',icon);
+			$('button[role="iconpicker"]').find('input').val(icon);
+			
 			if(data.type > 0 && data.groupnum == 0){
 				$('#bottomMenu').css({'display':'block'});
+				$('#menuValue').attr('name',data.type);
 			}else{
 				$('#bottomMenu').css({'display':'none'});
 			}
@@ -48,9 +62,17 @@ function addMenu(){
 function addMenuSetting(){
 	$('#menuDetail').css({'display':'none'});
 	$('#addMenuSetting').css({'display':'block'});
+	$('button[role="iconpicker"]').find('i').attr('class','empty');
+	$('button[role="iconpicker"]').find('input').val('empty');
 }
 function changeMenuName(){
 	$('#addMenu').text($('#name2').val());
+}
+function addBottomMenu(){
+	const type = $('#menuValue').attr('name');
+	const target = $('div[id^="menu'+type+'-"]');
+	const targetNum = target.length - 1;
+	$($('div[id^="menu'+type+'-"]')[targetNum]).after('<div>test</div>');
 }
 </script>
 
@@ -81,25 +103,30 @@ function changeMenuName(){
 	<div style="width: 50%; height: 300px; float: right; padding-top: 10px; padding-left: 10px;">
 		<div id="menuDetail">
 			<form action="updateMenu" method="post">
-				<div style="float: right; margin-top: -3px; display: none;" id="bottomMenu">
-					<button onclick="addBottomMenu()">하위 메뉴 추가</button>
-				</div>
 				<div>
 					<label>메뉴 이름</label>
-					<input type="text" name="name" id="name">
+					<!-- <input type="text" name="name" id="name"> -->
+					<div class="input-group" style="display: inline-flex; width: 70%;">
+					    <span class="input-group-prepend">
+					        <button class="btn btn-secondary" data-icon="empty" role="iconpicker"></button>
+					    </span>
+					    <input type="text" class="form-control" name="name" id="name">
+					</div>
 				</div>
-				<div>
+				<div style="margin-top: 10px">
 					<label>메뉴 타입</label>
 					일반 <input type="radio" name="type" value="0">
 					  그룹 <input type="radio" name="type" value="1">
 					  마이페이지 <input type="radio" name="type" value="2">
 					  관리페이지 <input type="radio" name="type" value="3">
 				</div>
-				<div id="topMenu"></div>
-				<div id="icon">
-					<label>아이콘</label>
+				<div id="topMenu" style="margin-top: 10px"></div>
+				
+				<div style="float: right; margin-top: 30px; display: none;" id="bottomMenu">
+					<div id="menuValue"></div>
+					<input type="button" onclick="addBottomMenu()" value="하위 메뉴 추가">
 				</div>
-				<div style="text-align: center; margin-top: 30px;">
+				<div style="float:left; margin-top: 30px;">
 					<input type="submit" value="수정">
 				</div>
 			</form>
@@ -109,7 +136,13 @@ function changeMenuName(){
 			<form action="addMenu" method="post">
 				<div>
 					<label>메뉴 이름</label>
-					<input type="text" name="name" id="name2" value="새메뉴" onchange="changeMenuName()">
+					<!-- <input type="text" name="name" id="name2" value="새메뉴" onchange="changeMenuName()"> -->
+					<div class="input-group" style="display: inline-flex; width: 70%;">
+					    <span class="input-group-prepend">
+					        <button class="btn btn-secondary" data-icon="empty" role="iconpicker"></button>
+					    </span>
+					    <input type="text" class="form-control" name="name2" id="name">
+					</div>
 				</div>
 				<div>
 					<label>메뉴 타입</label>
@@ -130,6 +163,8 @@ function changeMenuName(){
 </div>
 
 <%@include file="common/footer.jsp"%>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="dist/js/bootstrap-iconpicker.bundle.min.js"></script>
 </body>
 </html>
