@@ -55,7 +55,7 @@ function addMenu(){
 	if($('#addMenu').length > 0){
 		alert('이미 추가한 새메뉴가 존재합니다.');
 	}else{		
-		const str = '<div id="addMenu" class="menuData" onclick="addMenuSetting()">새메뉴</div>';
+		const str = '<div id="addMenu" class="menuData" onclick="addMenuSetting()">새 메뉴</div>';
 		$('#menuList').append(str);
 	}
 }
@@ -69,10 +69,15 @@ function changeMenuName(){
 	$('#addMenu').text($('#name2').val());
 }
 function addBottomMenu(){
+	if($('#addMenu').length > 0){
+		alert('이미 추가한 새메뉴가 존재합니다.');
+		return;
+	}
 	const type = $('#menuValue').attr('name');
 	const target = $('div[id^="menu'+type+'-"]');
 	const targetNum = target.length - 1;
-	$($('div[id^="menu'+type+'-"]')[targetNum]).after('<div>test</div>');
+	const str = '<div id="addTopMenu" class="menuData" onclick="addMenuSetting()">└새 하위메뉴</div>';
+	$($('div[id^="menu'+type+'-"]')[targetNum]).after(str);
 }
 </script>
 
