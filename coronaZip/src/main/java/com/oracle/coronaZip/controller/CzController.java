@@ -424,4 +424,14 @@ public class CzController {
 	public Menu menuSelect(String idx){
 		return bs.menuSelect(idx);
 	}
+	@PostMapping(value = "updateMenu")
+	public String menuUpdate(Menu menu) {
+		System.out.println(menu);
+		return "redirect:setMenu";
+	}
+	@PostMapping(value = "addMenu")
+	public String addUpdate(Menu menu) {
+		System.out.println(menu);
+		return "redirect:setMenu";
+	}
 }

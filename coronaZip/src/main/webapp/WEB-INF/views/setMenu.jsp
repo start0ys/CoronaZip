@@ -22,11 +22,13 @@ $(document).ready(function(){
 function changeMenu(idx){
 	$('#menuDetail').css({'display':'block'});
 	$('#addMenuSetting').css({'display':'none'});
+	$('#idx').val(idx);
 	$.ajax({
 		url:'menuSelect?idx='+idx,
 		dataType:'json',
 		success:function(data){
 			if($('#menuTop').length > 0) $('#menuTop').remove();
+			if($('#menuTop2').length > 0) $('#menuTop2').remove();
 			$('#name').val(data.name);
 			$("input[name='type'][value='"+data.type+"']").prop("checked", true);
 			let icon = '';
@@ -76,8 +78,13 @@ function addBottomMenu(){
 	const type = $('#menuValue').attr('name');
 	const target = $('div[id^="menu'+type+'-"]');
 	const targetNum = target.length - 1;
-	const str = '<div id="addTopMenu" class="menuData" onclick="addMenuSetting()">└새 하위메뉴</div>';
+	const str = '<div id="addTopMenu" class="menuData" onclick="addMenuSetting()">└ 새 하위메뉴</div>';
+	const str2 = '<div id="menuTop">'+
+				'	<label>상위 메뉴</label>'+
+					$('#menu'+type+'-0').html() +
+				'</div>';
 	$($('div[id^="menu'+type+'-"]')[targetNum]).after(str);
+	$('#topMenu2').append(str2);
 }
 </script>
 
@@ -108,6 +115,7 @@ function addBottomMenu(){
 	<div style="width: 50%; height: 300px; float: right; padding-top: 10px; padding-left: 10px;">
 		<div id="menuDetail">
 			<form action="updateMenu" method="post">
+				<input type="hidden" name="idx" id="idx">
 				<div>
 					<label>메뉴 이름</label>
 					<!-- <input type="text" name="name" id="name"> -->
@@ -156,10 +164,10 @@ function addBottomMenu(){
 					  마이페이지 <input type="radio" name="type2" value="2">
 					  관리페이지 <input type="radio" name="type2" value="3">
 				</div>
-				<div id="icon">
-					<label>아이콘</label>
-				</div>
-				<div style="text-align: center; margin-top: 30px;">
+				
+				<div id="topMenu2" style="margin-top: 10px"></div>
+				
+				<div style="float:left; margin-top: 30px;">
 					<input type="submit" value="추가">
 				</div>
 			</form>

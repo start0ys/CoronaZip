@@ -8,5 +8,5 @@ import lombok.Setter;
 public class Menu {
 	private int idx;		private int type; 		private int groupnum;
 	private String id;	    private String name;	private String link;
-	private String icon;
+	private String icon;    private String name2;   private int type2;
 }
