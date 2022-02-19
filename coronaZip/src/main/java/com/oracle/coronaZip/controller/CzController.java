@@ -127,7 +127,7 @@ public class CzController {
 		}else {
 			User user2 = is.user(user.getId());
 			session.setAttribute("user", user2);
-			return "redirect:/index";		
+			return "redirect:/center";		
 		}			
 	}
 
@@ -426,7 +426,7 @@ public class CzController {
 	}
 	@PostMapping(value = "updateMenu")
 	public String menuUpdate(Menu menu) {
-		System.out.println(menu);
+		String result = bs.menuUpdate(menu);
 		return "redirect:setMenu";
 	}
 	@PostMapping(value = "addMenu")

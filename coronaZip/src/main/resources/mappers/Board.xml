@@ -118,4 +118,11 @@
 	<select id="menuSelect" parameterType="java.lang.String" resultType="Menu">
 		select * from menulist where idx = #{idx}
 	</select>
+	<update id="menuUpdate" parameterType="Menu">
+		update menulist
+		set
+		name = #{name},
+		icon = #{icon}
+		where idx = #{idx}
+	</update>
 </mapper>

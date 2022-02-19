@@ -108,4 +108,9 @@ public class BoardDaoImpl implements BoardDao {
 		return session.selectOne("menuSelect", idx);
 	}
 
+	@Override
+	public void menuUpdate(Menu menu) {
+		session.update("menuUpdate", menu);
+	}
+
 }

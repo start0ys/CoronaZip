@@ -86,6 +86,10 @@ function addBottomMenu(){
 	$($('div[id^="menu'+type+'-"]')[targetNum]).after(str);
 	$('#topMenu2').append(str2);
 }
+function temporary(){
+	alert("현재는 메뉴 수정만 가능합니다.");
+	return false;
+}
 </script>
 
 <%@include file="common/menu.jsp"%>
@@ -128,10 +132,10 @@ function addBottomMenu(){
 				</div>
 				<div style="margin-top: 10px">
 					<label>메뉴 타입</label>
-					일반 <input type="radio" name="type" value="0">
-					  그룹 <input type="radio" name="type" value="1">
-					  마이페이지 <input type="radio" name="type" value="2">
-					  관리페이지 <input type="radio" name="type" value="3">
+					일반 <input type="radio" name="type" value="0" onclick="return(false);">
+					  그룹 <input type="radio" name="type" value="1" onclick="return(false);">
+					  마이페이지 <input type="radio" name="type" value="2" onclick="return(false);">
+					  관리페이지 <input type="radio" name="type" value="3" onclick="return(false);">
 				</div>
 				<div id="topMenu" style="margin-top: 10px"></div>
 				
@@ -146,7 +150,7 @@ function addBottomMenu(){
 		</div>
 		
 		<div id="addMenuSetting" style="display: none;">
-			<form action="addMenu" method="post">
+			<form action="addMenu" method="post" onsubmit="return temporary()">
 				<div>
 					<label>메뉴 이름</label>
 					<!-- <input type="text" name="name" id="name2" value="새메뉴" onchange="changeMenuName()"> -->

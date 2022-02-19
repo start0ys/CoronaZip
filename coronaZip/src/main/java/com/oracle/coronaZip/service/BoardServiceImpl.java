@@ -147,4 +147,14 @@ public class BoardServiceImpl implements BoardService{
 		return bd.menuSelect(idx);
 	}
 
+	@Override
+	public String menuUpdate(Menu menu) {
+		try {
+			bd.menuUpdate(menu);
+		} catch (Exception e) {
+			return "메뉴 수정 실패";
+		}
+		return null;
+	}
+
 }
