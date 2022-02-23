@@ -127,7 +127,7 @@ public class CzController {
 		}else {
 			User user2 = is.user(user.getId());
 			session.setAttribute("user", user2);
-			return "redirect:/center";		
+			return "redirect:/index";		
 		}			
 	}
 
